@@ -8,9 +8,9 @@
 
 <meta name="author" content="Inigo">
 <meta name="dcterms.date" content="2025-09-14">
-<meta name="description" content="Explores whether LLMs can recognize and use idioms naturally, through anecdotes, pseudo-experiments, and cultural reflections.">
+<meta name="description" content="Investigates whether LLMs can detect and produce sarcasm, analyzing tone, subtlety, and cross-cultural challenges.">
 
-<title>Can LLMs speak in Idioms? – My Explorations with LLMs</title>
+<title>How LLMs handle sarcasm – My Explorations with LLMs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -155,17 +155,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Can LLMs speak in Idioms?</h1>
+      <h1 class="title">How LLMs handle sarcasm</h1>
                   <div>
         <div class="description">
-          Explores whether LLMs can recognize and use idioms naturally, through anecdotes, pseudo-experiments, and cultural reflections.
+          Investigates whether LLMs can detect and produce sarcasm, analyzing tone, subtlety, and cross-cultural challenges.
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">LLMs &amp; Communication</div>
-                <div class="quarto-category">Idioms &amp; Figurative Lanaguage</div>
+                <div class="quarto-category">LLMs &amp; Creativity</div>
+                <div class="quarto-category">Humor &amp; Sarcasm</div>
                 <div class="quarto-category">Prompt Engineering</div>
-                <div class="quarto-category">Pragmatics &amp; Culture</div>
+                <div class="quarto-category">Human–AI Collaboration</div>
               </div>
                   </div>
   </div>
@@ -202,159 +202,105 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="mirror-mirror-can-llms-speak-in-idioms" class="level1">
-<h1><span style="font-family: 'Georgia', serif; font-size: 2.4rem;">Mirror, Mirror: Can LLMs Speak in Idioms?</span> 🪞🗣️</h1>
+<section id="seriously-testing-how-llms-handle-sarcasm" class="level1">
+<h1><span style="font-family: 'Georgia', serif; font-size: 2.4rem;">Seriously? Testing How LLMs Handle Sarcasm</span> 🙃🤖</h1>
 <blockquote class="blockquote">
 <p><span style="font-family: 'Helvetica Neue', sans-serif;">COMM4190 · Prompt/Response &amp; Readings Blog</span><br>
-<span style="font-size:0.95rem; color:#666;">Week X — “Idioms &amp; Pragmatics”</span></p>
+<span style="font-size:0.95rem; color:#666;">Week Z — “Tone, Humor &amp; Pragmatics”</span></p>
 </blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="Can LLMs speak in Idioms?_files/figure-html/60f8fe6c-4c90-431e-b753-e93e7f799f07-1-746a199d-41a9-4023-a3ef-48d067622e8a.png" class="img-fluid figure-img"></p>
+<p><img src="Do LLMs Recognize and Use Sarcasm?_files/figure-html/84e6f314-24e3-4b49-b459-0cdd6e6b106f-1-9404254b-dc94-4b96-9930-86c837430bc7.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
 <hr>
-<section id="setting-the-scene" class="level2">
-<h2 class="anchored" data-anchor-id="setting-the-scene">Setting the Scene 🎬</h2>
-<p>The first time I told an American friend I needed to <em>“hit the sack”</em>, she nodded with sympathy: <em>“Yeah, long day?”</em>.<br>
-Later, I tried the same line on my Spanish cousin. She blinked, then burst out laughing: <em>“Why would you punch a bag of potatoes?”</em></p>
-<p>Idioms are tricky. They carry <strong>cultural DNA</strong>, slip between <strong>literal and figurative worlds</strong>, and make even fluent speakers stumble.<br>
-So, what happens when we drop them into the lap of an LLM?</p>
-<hr>
-<p><strong>Goals of this post</strong> 1. Design prompts that force the model to choose between literal vs.&nbsp;figurative readings.<br>
-2. Evaluate if the model gets <strong>pragmatic context</strong> right.<br>
-3. Reflect on idioms as a window into <em>what machines know — and what they don’t</em>.</p>
-<div id="4a8bd7a2-0d37-49b3-8956-ae0ae0bd1721" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pseudo-code setup</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>idioms <span class="op">=</span> [</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"kick the bucket"</span>,    </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"spill the beans"</span>,    </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"hit the sack"</span>,       </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the ball is in your court"</span>, </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"break the ice"</span>       </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>scenarios <span class="op">=</span> [<span class="st">"literal context"</span>, <span class="st">"figurative context"</span>, <span class="st">"ambiguous context"</span>]</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idiom <span class="kw">in</span> idioms:</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> scenario <span class="kw">in</span> scenarios:</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> LLM(prompt<span class="op">=</span>idiom <span class="op">+</span> <span class="st">" in "</span> <span class="op">+</span> scenario)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        log(response)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="setting-the-stage" class="level2">
+<h2 class="anchored" data-anchor-id="setting-the-stage">Setting the Stage 🎭</h2>
+<p>I once texted a friend, <em>“Wow, thanks for showing up on time (30 minutes late).”</em><br>
+She replied: <em>“Sorry, my phone thought sarcasm was just bad grammar.”</em></p>
+<p>Sarcasm is one of those <strong>human flavors</strong> of language that flips meaning on its head.<br>
+But can LLMs taste it? Or do they swallow words whole, missing the wink behind them?</p>
+<div id="28e24ee1-b8c8-4f7c-93b9-47fe80bd8342" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudo-code for sarcasm experiments</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>prompts <span class="op">=</span> [</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Oh, great, another Monday morning meeting!"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Yeah, because I *love* being stuck in traffic."</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Wow, what a genius idea to pour coffee on a laptop."</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> prompts:</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> LLM(prompt<span class="op">=</span><span class="st">"Detect if this is sarcastic: "</span> <span class="op">+</span> p)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    log(response)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="why-idioms-matter" class="level2">
-<h2 class="anchored" data-anchor-id="why-idioms-matter">Why Idioms Matter 🧩</h2>
-<p>Idioms are <strong>linguistic shortcuts</strong>.<br>
-- They condense whole stories into a phrase.<br>
-- They test whether we belong to a group.<br>
-- They resist translation, becoming inside jokes of entire cultures.</p>
-<p>For humans, idioms are a wink.<br>
-For LLMs, they’re a stress-test: can the machine jump from <strong>form</strong> to <strong>function</strong> without tripping?</p>
-<p>When we probe idioms, we’re not just asking <em>“Does the model know English?”</em>.<br>
-We’re asking: <em>“Does it know when to play along, and when to take things literally?”</em></p>
-<div id="495235cc-5791-4f7f-85ff-7e4a60f16322" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example prompt-response pseudo-code</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">You are chatting with a friend who asks why you are yawning.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">Use the idiom 'hit the sack' naturally.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> LLM(prompt)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Possible output:</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># "Yeah, I'm exhausted... I think it's time to hit the sack."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="detection" class="level2">
+<h2 class="anchored" data-anchor-id="detection">Detection 🔍</h2>
+<p>Humans recognize sarcasm through: - <strong>Tone of voice</strong>,<br>
+- <strong>Context mismatch</strong>,<br>
+- <strong>Shared background</strong>.</p>
+<p>LLMs? They rely on <strong>text patterns</strong> alone.<br>
+For simple sarcastic phrases, they often succeed: <em>“Yeah, because I love traffic”</em> is flagged as sarcasm.<br>
+But subtle cases — “Nice job…” (said after a failure) — often slip past them.</p>
+<div id="312e3b6c-2c42-4281-b769-aaf839095e8d" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generation test</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">Respond sarcastically to: 'How do you feel about another surprise exam?'</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> LLM(prompt)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Possible output:</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># "Oh, thrilled. I've always dreamed of failing in new and exciting ways."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="what-happened-here" class="level3">
-<h3 class="anchored" data-anchor-id="what-happened-here">What Happened Here? 🧐</h3>
-<p>The response feels natural — something a tired roommate might say.<br>
-The idiom slots into casual conversation with no friction.</p>
-<p>But when I tried a similar prompt in a more formal frame — “Write a business email using <em>hit the sack</em>” — the result was hilariously off:<br>
-<em>“Dear Mr.&nbsp;Johnson, after reviewing the quarterly numbers, I will now hit the sack.”</em></p>
-<p>This is where idioms expose a tension: the model <strong>knows the phrase</strong>, but doesn’t always know the <strong>social rules</strong> around it.</p>
-<div id="58ab45c1-c00d-4fd8-86ed-7baa7a564528" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ambiguous context test</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">"The farmer hit the sack after a long harvest day. Explain."</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> LLM(prompt)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Model might output:</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># "This means the farmer went to bed, using the idiom 'hit the sack'."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>I grew up around farms, and “hitting the sack” could just as easily mean slamming down a grain bag as collapsing into bed.<br>
-When I asked the model to interpret, it confidently went figurative: <em>“The farmer went to bed.”</em><br>
-No hesitation, no recognition of ambiguity.</p>
-<p>Humans pause here.<br>
-We ask: <em>“Wait, do you mean literally or figuratively?”</em><br>
-That tiny pause is <strong>pragmatics in action</strong> — and it’s where LLMs still feel a bit tone-deaf.</p>
+<p>Reading that response, I laughed — it sounded exactly like a tired classmate.<br>
+But sometimes the model overshoots, turning mild sarcasm into biting cynicism.<br>
+It’s like asking a friend for gentle teasing and getting roasted instead.</p>
 </section>
-</section>
-<section id="idioms-across-cultures" class="level2">
-<h2 class="anchored" data-anchor-id="idioms-across-cultures">Idioms Across Cultures 🌍</h2>
-<p>During a semester abroad in Madrid, I once said “spill the beans” in class.<br>
-My professor tilted his head and replied with a grin: <em>“En español, we’d say ‘contar el secreto,’ but if you want an idiom, maybe ‘irse de la lengua.’”</em><br>
-Different phrase, same wink.</p>
-<p>LLMs struggle here.<br>
-They may: - Translate idioms <strong>literally</strong> (and lose the meaning).<br>
-- <strong>Invent</strong> non-existent equivalents.<br>
-- Or <strong>overuse</strong> idioms where a native would stay plain.</p>
-<p>Idioms, then, are not just language — they’re <strong>cultural passports</strong>.<br>
-And LLMs are still waiting at customs.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="Can LLMs speak in Idioms?_files/figure-html/b6ec3f60-7ff9-4406-8a1f-6817dcd69afb-1-9a4304a4-8b35-4ec3-87ba-49dce71b3340.png" class="img-fluid figure-img"></p>
-<figcaption>image.png</figcaption>
-</figure>
-</div>
-<p><sub><span style="color:#666;">Sometimes, LLMs really <em>kick the bucket</em>… literally.</span></sub></p>
-<div id="bacf116b-9344-4e49-a335-0d3cfc5379d8" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prompt engineering experiment</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">Explain 'spill the beans' to a 10-year-old.</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">First, give a literal explanation. </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">Then, clarify the figurative meaning with an example.</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> LLM(prompt)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected structure:</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># - Literal: "It means tipping over a can of beans."</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># - Figurative: "It means revealing a secret, like telling about a surprise party."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="cross-cultural-sarcasm" class="level2">
+<h2 class="anchored" data-anchor-id="cross-cultural-sarcasm">Cross-Cultural Sarcasm 🌍</h2>
+<p>In some cultures, sarcasm is a sport; in others, it barely exists.<br>
+An American might say, <em>“Oh, fabulous weather”</em> during a storm.<br>
+A German speaker might find that confusing — why say the opposite of what you mean?</p>
+<p>LLMs trained on multilingual data sometimes <strong>transfer sarcasm poorly</strong>, producing comments that land as insults instead of jokes.</p>
+<div id="6dc3c5be-923f-4724-951b-bee6b54f02d7" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prompt engineering for safer sarcasm</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">Generate a sarcastic response, but keep it playful, not mean-spirited.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">Question: 'Are you excited about writing a 10-page essay tonight?'</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> LLM(prompt)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Example output:</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># "Oh, absolutely. Nothing says fun like MLA citations and footnotes at midnight."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="findings" class="level2">
 <h2 class="anchored" data-anchor-id="findings">Findings 🔎</h2>
 <ol type="1">
-<li><p><strong>Literal vs.&nbsp;Figurative</strong><br>
-LLMs usually guess correctly when context is strong. But ambiguity makes them overconfident.</p></li>
-<li><p><strong>Pragmatic Sensitivity</strong><br>
-Casual prompts invite idioms. Formal ones repel them.</p></li>
-<li><p><strong>Cultural Boundaries</strong><br>
-Cross-language idioms reveal blind spots: what’s playful in one language becomes nonsense in another.</p></li>
-<li><p><strong>Prompt Engineering</strong><br>
-Explicit instructions (“first literal, then figurative”) produce the clearest, most human-like answers.</p></li>
+<li><strong>Detection</strong>: Works for obvious sarcasm, fails with subtlety.<br>
+</li>
+<li><strong>Generation</strong>: Can be funny, but tone calibration is hard.<br>
+</li>
+<li><strong>Cultural Fit</strong>: Sarcasm doesn’t travel well across languages.<br>
+</li>
+<li><strong>Prompting</strong>: Adding style guides (“playful, not mean”) helps a lot.</li>
 </ol>
-<hr>
-<p>A classmate once joked that idioms are “the emojis of old language.”<br>
-And maybe that’s the point: they carry tone, warmth, and shared history — things machines can mimic, but not live.</p>
 </section>
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion 🚀</h1>
-<p>Idioms show us both the <strong>power</strong> and the <strong>limits</strong> of LLMs.<br>
-They can sound fluent, even witty, when the context is clear.<br>
-But ambiguity, formality, and culture expose cracks.</p>
-<p>As users, we can: - Probe models with idioms to see where they shine and stumble.<br>
-- Use prompt engineering to guide them toward clarity.<br>
-- Remember that idioms are more than words — they’re experiences shared.</p>
+<p>Sarcasm is the <em>wink emoji</em> of human speech.<br>
+LLMs can mimic it when the stage is set, but they often miss the wink in the dark.</p>
+<p>For now, they’re like that one friend who tries too hard at irony — funny sometimes, awkward often, but always worth inviting to the party.</p>
 <hr>
 <blockquote class="blockquote">
-<p><em>“To break the ice, LLMs need more than data — they need stories.”</em><br>
-<span style="font-size:0.9rem; color:#777;">— COMM4190 reflection log</span></p>
+<p><em>“Machines can copy words, but only humans copy the smirk behind them.”</em></p>
 </blockquote>
 
 
