@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>My Explorations with LLMs</title>
+<title>Mirror, Mirror: Can LLMs Speak in Idioms? 🪞🗣️ – My Explorations with LLMs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,29 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1713c1db1ad41a796903378fc9ac7b2b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1713c1db1ad41a796903378fc9ac7b2b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,79 +103,21 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">My Explorations with LLMs</span>
     </a>
   </div>
@@ -153,7 +128,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -176,13 +151,13 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">My Explorations with LLMs</h1>
+    <div class="quarto-title column-body">
+      <h1 class="title"><span style="font-family: 'Georgia', serif; font-size: 2.4rem;">Mirror, Mirror: Can LLMs Speak in Idioms?</span> 🪞🗣️</h1>
                       </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
       
     
@@ -190,118 +165,173 @@ window.Quarto = {
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="QnJhbmRpbmclMjAlMjYlMjBNYXJrZXRpbmc=">Branding &amp; Marketing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SHVtYW4lRTIlODAlOTNBSSUyMENvbGxhYm9yYXRpb24=">Human–AI Collaboration <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TExNcw==">LLMs <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TExNcyUyMCUyNiUyMENyZWF0aXZpdHk=">LLMs &amp; Creativity <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bG9naWM=">logic <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHJvbXB0JTIwRW5naW5lZXJpbmc=">Prompt Engineering <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJvbXB0aW5n">prompting <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1757857152391" data-listing-reading-time-sort="4" data-listing-word-count-sort="721">
-<div class="thumbnail"><a href="./posts/002_Can LLMs recognize and use idioms naturally?/Can LLMs speak in Idioms?.html" class="no-external">
-
-<p class="card-img-top"><img src="posts/002_Can LLMs recognize and use idioms naturally?/Can LLMs speak in Idioms?_files/figure-html/60f8fe6c-4c90-431e-b753-e93e7f799f07-1-746a199d-41a9-4023-a3ef-48d067622e8a.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/002_Can LLMs recognize and use idioms naturally?/Can LLMs speak in Idioms?.html" class="no-external"><span style="font-family: 'Georgia', serif; font-size: 2.4rem;">Mirror, Mirror: Can LLMs Speak in Idioms?</span> 🪞🗣️</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/002_Can LLMs recognize and use idioms naturally?/Can LLMs speak in Idioms?.html" class="no-external">
-<span style="font-family: 'Helvetica Neue', sans-serif;">COMM4190 · Prompt/Response &amp; Readings Blog</span><br>
-<span style="font-size:0.95rem; color:#666;">Week X — “Idioms &amp; Pragmatics”</span>
-</a></div>
+<blockquote class="blockquote">
+<p><span style="font-family: 'Helvetica Neue', sans-serif;">COMM4190 · Prompt/Response &amp; Readings Blog</span><br>
+<span style="font-size:0.95rem; color:#666;">Week X — “Idioms &amp; Pragmatics”</span></p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Can LLMs speak in Idioms?_files/figure-html/60f8fe6c-4c90-431e-b753-e93e7f799f07-1-746a199d-41a9-4023-a3ef-48d067622e8a.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
 </div>
-<div class="metadata">
-<a href="./posts/002_Can LLMs recognize and use idioms naturally?/Can LLMs speak in Idioms?.html" class="no-external">
-</a>
+<hr>
+<section id="setting-the-scene" class="level2">
+<h2 class="anchored" data-anchor-id="setting-the-scene">Setting the Scene 🎬</h2>
+<p>The first time I told an American friend I needed to <em>“hit the sack”</em>, she nodded with sympathy: <em>“Yeah, long day?”</em>.<br>
+Later, I tried the same line on my Spanish cousin. She blinked, then burst out laughing: <em>“Why would you punch a bag of potatoes?”</em></p>
+<p>Idioms are tricky. They carry <strong>cultural DNA</strong>, slip between <strong>literal and figurative worlds</strong>, and make even fluent speakers stumble.<br>
+So, what happens when we drop them into the lap of an LLM?</p>
+<hr>
+<p><strong>Goals of this post</strong> 1. Design prompts that force the model to choose between literal vs.&nbsp;figurative readings.<br>
+2. Evaluate if the model gets <strong>pragmatic context</strong> right.<br>
+3. Reflect on idioms as a window into <em>what machines know — and what they don’t</em>.</p>
+<div id="4a8bd7a2-0d37-49b3-8956-ae0ae0bd1721" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pseudo-code setup</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>idioms <span class="op">=</span> [</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"kick the bucket"</span>,    </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"spill the beans"</span>,    </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"hit the sack"</span>,       </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"the ball is in your court"</span>, </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"break the ice"</span>       </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>scenarios <span class="op">=</span> [<span class="st">"literal context"</span>, <span class="st">"figurative context"</span>, <span class="st">"ambiguous context"</span>]</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idiom <span class="kw">in</span> idioms:</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> scenario <span class="kw">in</span> scenarios:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> LLM(prompt<span class="op">=</span>idiom <span class="op">+</span> <span class="st">" in "</span> <span class="op">+</span> scenario)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        log(response)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+<section id="why-idioms-matter" class="level2">
+<h2 class="anchored" data-anchor-id="why-idioms-matter">Why Idioms Matter 🧩</h2>
+<p>Idioms are <strong>linguistic shortcuts</strong>.<br>
+- They condense whole stories into a phrase.<br>
+- They test whether we belong to a group.<br>
+- They resist translation, becoming inside jokes of entire cultures.</p>
+<p>For humans, idioms are a wink.<br>
+For LLMs, they’re a stress-test: can the machine jump from <strong>form</strong> to <strong>function</strong> without tripping?</p>
+<p>When we probe idioms, we’re not just asking <em>“Does the model know English?”</em>.<br>
+We’re asking: <em>“Does it know when to play along, and when to take things literally?”</em></p>
+<div id="495235cc-5791-4f7f-85ff-7e4a60f16322" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example prompt-response pseudo-code</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">You are chatting with a friend who asks why you are yawning.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">Use the idiom 'hit the sack' naturally.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> LLM(prompt)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Possible output:</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># "Yeah, I'm exhausted... I think it's time to hit the sack."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="TExNcyUyMCUyNiUyMENyZWF0aXZpdHklMkNCcmFuZGluZyUyMCUyNiUyME1hcmtldGluZyUyQ1Byb21wdCUyMEVuZ2luZWVyaW5nJTJDSHVtYW4lRTIlODAlOTNBSSUyMENvbGxhYm9yYXRpb24=" data-listing-date-sort="1757808000000" data-listing-file-modified-sort="1757857152372" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="527">
-<div class="thumbnail"><a href="./posts/001_Brands &amp; LLMs/Branding &amp; LLMs.html" class="no-external">
+<section id="what-happened-here" class="level3">
+<h3 class="anchored" data-anchor-id="what-happened-here">What Happened Here? 🧐</h3>
+<p>The response feels natural — something a tired roommate might say.<br>
+The idiom slots into casual conversation with no friction.</p>
+<p>But when I tried a similar prompt in a more formal frame — “Write a business email using <em>hit the sack</em>” — the result was hilariously off:<br>
+<em>“Dear Mr.&nbsp;Johnson, after reviewing the quarterly numbers, I will now hit the sack.”</em></p>
+<p>This is where idioms expose a tension: the model <strong>knows the phrase</strong>, but doesn’t always know the <strong>social rules</strong> around it.</p>
+<div id="58ab45c1-c00d-4fd8-86ed-7baa7a564528" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ambiguous context test</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">"The farmer hit the sack after a long harvest day. Explain."</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> LLM(prompt)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Model might output:</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># "This means the farmer went to bed, using the idiom 'hit the sack'."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>I grew up around farms, and “hitting the sack” could just as easily mean slamming down a grain bag as collapsing into bed.<br>
+When I asked the model to interpret, it confidently went figurative: <em>“The farmer went to bed.”</em><br>
+No hesitation, no recognition of ambiguity.</p>
+<p>Humans pause here.<br>
+We ask: <em>“Wait, do you mean literally or figuratively?”</em><br>
+That tiny pause is <strong>pragmatics in action</strong> — and it’s where LLMs still feel a bit tone-deaf.</p>
+</section>
+</section>
+<section id="idioms-across-cultures" class="level2">
+<h2 class="anchored" data-anchor-id="idioms-across-cultures">Idioms Across Cultures 🌍</h2>
+<p>During a semester abroad in Madrid, I once said “spill the beans” in class.<br>
+My professor tilted his head and replied with a grin: <em>“En español, we’d say ‘contar el secreto,’ but if you want an idiom, maybe ‘irse de la lengua.’”</em><br>
+Different phrase, same wink.</p>
+<p>LLMs struggle here.<br>
+They may: - Translate idioms <strong>literally</strong> (and lose the meaning).<br>
+- <strong>Invent</strong> non-existent equivalents.<br>
+- Or <strong>overuse</strong> idioms where a native would stay plain.</p>
+<p>Idioms, then, are not just language — they’re <strong>cultural passports</strong>.<br>
+And LLMs are still waiting at customs.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Can LLMs speak in Idioms?_files/figure-html/b6ec3f60-7ff9-4406-8a1f-6817dcd69afb-1-9a4304a4-8b35-4ec3-87ba-49dce71b3340.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<p><sub><span style="color:#666;">Sometimes, LLMs really <em>kick the bucket</em>… literally.</span></sub></p>
+<div id="bacf116b-9344-4e49-a335-0d3cfc5379d8" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prompt engineering experiment</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">Explain 'spill the beans' to a 10-year-old.</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">First, give a literal explanation. </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">Then, clarify the figurative meaning with an example.</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> LLM(prompt)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected structure:</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># - Literal: "It means tipping over a can of beans."</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># - Figurative: "It means revealing a secret, like telling about a surprise party."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="findings" class="level2">
+<h2 class="anchored" data-anchor-id="findings">Findings 🔎</h2>
+<ol type="1">
+<li><p><strong>Literal vs.&nbsp;Figurative</strong><br>
+LLMs usually guess correctly when context is strong. But ambiguity makes them overconfident.</p></li>
+<li><p><strong>Pragmatic Sensitivity</strong><br>
+Casual prompts invite idioms. Formal ones repel them.</p></li>
+<li><p><strong>Cultural Boundaries</strong><br>
+Cross-language idioms reveal blind spots: what’s playful in one language becomes nonsense in another.</p></li>
+<li><p><strong>Prompt Engineering</strong><br>
+Explicit instructions (“first literal, then figurative”) produce the clearest, most human-like answers.</p></li>
+</ol>
+<hr>
+<p>A classmate once joked that idioms are “the emojis of old language.”<br>
+And maybe that’s the point: they carry tone, warmth, and shared history — things machines can mimic, but not live.</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion 🚀</h1>
+<p>Idioms show us both the <strong>power</strong> and the <strong>limits</strong> of LLMs.<br>
+They can sound fluent, even witty, when the context is clear.<br>
+But ambiguity, formality, and culture expose cracks.</p>
+<p>As users, we can: - Probe models with idioms to see where they shine and stumble.<br>
+- Use prompt engineering to guide them toward clarity.<br>
+- Remember that idioms are more than words — they’re experiences shared.</p>
+<hr>
+<blockquote class="blockquote">
+<p><em>“To break the ice, LLMs need more than data — they need stories.”</em><br>
+<span style="font-size:0.9rem; color:#777;">— COMM4190 reflection log</span></p>
+</blockquote>
 
-<p class="card-img-top"><img src="posts/001_Brands & LLMs/Branding & LLMs_files/figure-html/97ae2a71-708b-4c03-9acc-cd2ac7bba7fb-1-1e0feb04-2aaf-40e7-a1ef-a759889fcecb.png"  class="thumbnail-image card-img"/></p>
 
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/001_Brands &amp; LLMs/Branding &amp; LLMs.html" class="no-external">Branding with LLMs</a>
-</h3>
-<div class="listing-categories">
+</section>
 
-<div class="listing-category" onclick="window.quartoListingCategory('TExNcyUyMCUyNiUyMENyZWF0aXZpdHk='); return false;">LLMs &amp; Creativity</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('QnJhbmRpbmclMjAlMjYlMjBNYXJrZXRpbmc='); return false;">Branding &amp; Marketing</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHJvbXB0JTIwRW5naW5lZXJpbmc='); return false;">Prompt Engineering</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SHVtYW4lRTIlODAlOTNBSSUyMENvbGxhYm9yYXRpb24='); return false;">Human–AI Collaboration</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/001_Brands &amp; LLMs/Branding &amp; LLMs.html" class="no-external">
-<p>An experimental blog post testing how LLMs generate product names, taglines, and branding ideas, blending pseudo-code experiments with storytelling on creativity and human–machine collaboration.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/001_Brands &amp; LLMs/Branding &amp; LLMs.html" class="no-external">
-<div class="listing-date">
-Sep 14, 2025
-</div>
-<div class="listing-author">
-Inigo
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="TExNcyUyQ3Byb21wdGluZyUyQ2xvZ2lj" data-listing-date-sort="1706832000000" data-listing-file-modified-sort="1757857152363" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="450">
-<div class="thumbnail"><a href="./posts/000_test_post/index.html" class="no-external">
-
-<p class="card-img-top"><img src="posts/000_test_post/gpt3-5.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/000_test_post/index.html" class="no-external">A test post</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('TExNcw=='); return false;">LLMs</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvbXB0aW5n'); return false;">prompting</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bG9naWM='); return false;">logic</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/000_test_post/index.html" class="no-external">
-<p>An example post from a Jupyter notebook</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/000_test_post/index.html" class="no-external">
-<div class="listing-date">
-Feb 2, 2024
-</div>
-<div class="listing-author">
-An LLM User
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
