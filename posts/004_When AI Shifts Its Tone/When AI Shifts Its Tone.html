@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Inigo">
+<meta name="dcterms.date" content="2025-09-16">
+<meta name="description" content="Mood Swings in Machine Talk playfully explores how large language models shift their tone — from formal academic to casual friend to sassy teenager — showing how one machine voice can wear many human masks.">
 
-<title>My Explorations with LLMs</title>
+<title>When AI Shifts Tone – My Explorations with LLMs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,29 +23,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1713c1db1ad41a796903378fc9ac7b2b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1713c1db1ad41a796903378fc9ac7b2b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,79 +106,21 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">My Explorations with LLMs</span>
     </a>
   </div>
@@ -153,7 +131,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -176,220 +154,224 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">My Explorations with LLMs</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">When AI Shifts Tone</h1>
+                  <div>
+        <div class="description">
+          Mood Swings in Machine Talk playfully explores how large language models shift their tone — from formal academic to casual friend to sassy teenager — showing how one machine voice can wear many human masks.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Tone &amp; Style</div>
+                <div class="quarto-category">AI Communication</div>
+                <div class="quarto-category">Human-Machine Interactions</div>
+                <div class="quarto-category">Playful Linguistics</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Inigo </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 16, 2025</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="QUklMjBDb21tdW5pY2F0aW9u">AI Communication <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QnJhbmRpbmclMjAlMjYlMjBNYXJrZXRpbmc=">Branding &amp; Marketing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SHVtYW4tTWFjaGluZSUyMEludGVyYWN0aW9ucw==">Human-Machine Interactions <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SHVtYW4lRTIlODAlOTNBSSUyMENvbGxhYm9yYXRpb24=">Human–AI Collaboration <span class="quarto-category-count">(2)</span></div><div class="category" data-category="SHVtb3IlMjAlMjYlMjBTYXJjYXNt">Humor &amp; Sarcasm <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SWRpb21zJTIwJTI2JTIwRmlndXJhdGl2ZSUyMExhbmFndWFnZQ==">Idioms &amp; Figurative Lanaguage <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TExNcw==">LLMs <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TExNcyUyMCUyNiUyMENvbW11bmljYXRpb24=">LLMs &amp; Communication <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TExNcyUyMCUyNiUyMENyZWF0aXZpdHk=">LLMs &amp; Creativity <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bG9naWM=">logic <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UGxheWZ1bCUyMExpbmd1aXN0aWNz">Playful Linguistics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHJhZ21hdGljcyUyMCUyNiUyMEN1bHR1cmU=">Pragmatics &amp; Culture <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHJvbXB0JTIwRW5naW5lZXJpbmc=">Prompt Engineering <span class="quarto-category-count">(3)</span></div><div class="category" data-category="cHJvbXB0aW5n">prompting <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VG9uZSUyMCUyNiUyMFN0eWxl">Tone &amp; Style <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="VG9uZSUyMCUyNiUyMFN0eWxlJTJDQUklMjBDb21tdW5pY2F0aW9uJTJDSHVtYW4tTWFjaGluZSUyMEludGVyYWN0aW9ucyUyQ1BsYXlmdWwlMjBMaW5ndWlzdGljcw==" data-listing-date-sort="1757980800000" data-listing-file-modified-sort="1757977644994" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="577">
-<div class="thumbnail"><a href="./posts/004_When AI Shifts Its Tone/When AI Shifts Its Tone.html" class="no-external">
-
-<p class="card-img-top"><img src="posts/004_When AI Shifts Its Tone/When AI Shifts Its Tone_files/figure-html/8f86b8d6-c568-4db0-b3fd-b7158809d32e-1-572cf094-4a03-4de1-aef3-77c24b2589b9.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/004_When AI Shifts Its Tone/When AI Shifts Its Tone.html" class="no-external">When AI Shifts Tone</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('VG9uZSUyMCUyNiUyMFN0eWxl'); return false;">Tone &amp; Style</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('QUklMjBDb21tdW5pY2F0aW9u'); return false;">AI Communication</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SHVtYW4tTWFjaGluZSUyMEludGVyYWN0aW9ucw=='); return false;">Human-Machine Interactions</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UGxheWZ1bCUyMExpbmd1aXN0aWNz'); return false;">Playful Linguistics</div>
-
+<section id="mood-swings-in-machine-talk-when-ai-shifts-its-tone" class="level1">
+<h1>Mood Swings in Machine Talk: When AI Shifts Its Tone</h1>
+<p><em>COMM4190 Blog Post — Fall 2025</em><br>
+Author: Inigo Week 2</p>
+<hr>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">🎭 Introduction</h2>
+<p>What happens when a language model wakes up one morning and decides:<br>
+&gt; “Today, I’m not going to sound like a professor. I’m going to sound like a teenager who just discovered sarcasm.”</p>
+<p>This blog post is about <em>tone-shifting</em> in large language models (LLMs).<br>
+We’ll explore how the <strong>same input</strong> can produce wildly different outputs —<br>
+from <strong>formal academic</strong> to <strong>casual buddy</strong> to <strong>sassy teenager</strong>.</p>
+<p>Think of it as <em>AI mood swings</em>. One moment:<br>
+&gt; <em>“According to sociolinguistic frameworks, politeness strategies manifest…”</em></p>
+<p>The next moment:<br>
+&gt; <em>“Bruh, chill. That’s literally just being nice.”</em></p>
+<p>Let’s dive in.</p>
+<div id="416a5adf-9b9e-4e64-ab50-7598df899077" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's define our "mood dataset"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>moods <span class="op">=</span> [<span class="st">"formal_academic"</span>, <span class="st">"casual_friend"</span>, <span class="st">"sassy_teenager"</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A universal test prompt</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">"Explain why the sky looks blue."</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated function call</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ask_ai(prompt, mood):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"AI (</span><span class="sc">{</span>mood<span class="sc">}</span><span class="ss">) response goes here..."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="delink listing-description"><a href="./posts/004_When AI Shifts Its Tone/When AI Shifts Its Tone.html" class="no-external">
-<p>Mood Swings in Machine Talk playfully explores how large language models shift their tone — from formal academic to casual friend to sassy teenager — showing how one machine voice can wear many human masks.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/004_When AI Shifts Its Tone/When AI Shifts Its Tone.html" class="no-external">
-<div class="listing-date">
-Sep 16, 2025
-</div>
-<div class="listing-author">
-Inigo
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="TExNcyUyMCUyNiUyMENyZWF0aXZpdHklMkNCcmFuZGluZyUyMCUyNiUyME1hcmtldGluZyUyQ1Byb21wdCUyMEVuZ2luZWVyaW5nJTJDSHVtYW4lRTIlODAlOTNBSSUyMENvbGxhYm9yYXRpb24=" data-listing-date-sort="1757808000000" data-listing-file-modified-sort="1757977644955" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="527">
-<div class="thumbnail"><a href="./posts/001_Brands &amp; LLMs/Branding &amp; LLMs.html" class="no-external">
+</section>
+<section id="mood-demo-1-why-is-the-sky-blue" class="level2">
+<h2 class="anchored" data-anchor-id="mood-demo-1-why-is-the-sky-blue">🌈 Mood Demo #1: Why is the sky blue?</h2>
+<p>We’ll feed the same question — <em>“Why is the sky blue?”</em> — into our imaginary LLM.</p>
+<section id="formal-academic" class="level3">
+<h3 class="anchored" data-anchor-id="formal-academic">1. Formal Academic</h3>
+<blockquote class="blockquote">
+<p>“The phenomenon of the sky’s blue coloration is attributable to <strong>Rayleigh scattering</strong>, whereby shorter wavelengths of light (specifically those in the blue spectrum) are dispersed more effectively by the gaseous molecules in Earth’s atmosphere than longer wavelengths such as red.”</p>
+</blockquote>
+</section>
+<section id="casual-friend" class="level3">
+<h3 class="anchored" data-anchor-id="casual-friend">2. Casual Friend</h3>
+<blockquote class="blockquote">
+<p>“Basically, sunlight gets scattered around when it hits the air, and blue light bounces around the most. So our eyes pick up on the blue. Science, but chill.”</p>
+</blockquote>
+</section>
+<section id="sassy-teenager" class="level3">
+<h3 class="anchored" data-anchor-id="sassy-teenager">3. Sassy Teenager</h3>
+<blockquote class="blockquote">
+<p>“OMG, seriously? Haven’t you like, <em>looked up</em> before? It’s blue ’cause the atmosphere is out here vibin’ with light. Red doesn’t slay as hard, so blue wins. Duh.”</p>
+</blockquote>
+<p><em>Same question, three moods. Instant personality shifts.</em></p>
+<div id="1438acb2-ff0e-45cf-a69b-67a0b42f6370" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's simulate storing those outputs</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>responses <span class="op">=</span> {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"formal_academic"</span>: <span class="st">"Rayleigh scattering explanation..."</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"casual_friend"</span>: <span class="st">"Blue light bounces more..."</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sassy_teenager"</span>: <span class="st">"OMG, seriously?..."</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize responses</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mood, resp <span class="kw">in</span> responses.items():</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>mood<span class="sc">.</span>upper()<span class="sc">}</span><span class="ss">:</span><span class="ch">\n</span><span class="sc">{</span>resp<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>FORMAL_ACADEMIC:
+Rayleigh scattering explanation...
 
-<p class="card-img-top"><img src="posts/001_Brands & LLMs/Branding & LLMs_files/figure-html/97ae2a71-708b-4c03-9acc-cd2ac7bba7fb-1-1e0feb04-2aaf-40e7-a1ef-a759889fcecb.png"  class="thumbnail-image card-img"/></p>
+CASUAL_FRIEND:
+Blue light bounces more...
 
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/001_Brands &amp; LLMs/Branding &amp; LLMs.html" class="no-external">Branding with LLMs</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('TExNcyUyMCUyNiUyMENyZWF0aXZpdHk='); return false;">LLMs &amp; Creativity</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('QnJhbmRpbmclMjAlMjYlMjBNYXJrZXRpbmc='); return false;">Branding &amp; Marketing</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHJvbXB0JTIwRW5naW5lZXJpbmc='); return false;">Prompt Engineering</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SHVtYW4lRTIlODAlOTNBSSUyMENvbGxhYm9yYXRpb24='); return false;">Human–AI Collaboration</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/001_Brands &amp; LLMs/Branding &amp; LLMs.html" class="no-external">
-<p>An experimental blog post testing how LLMs generate product names, taglines, and branding ideas, blending pseudo-code experiments with storytelling on creativity and human–machine collaboration.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/001_Brands &amp; LLMs/Branding &amp; LLMs.html" class="no-external">
-<div class="listing-date">
-Sep 14, 2025
-</div>
-<div class="listing-author">
-Inigo
-</div>
-</a>
+SASSY_TEENAGER:
+OMG, seriously?...
+</code></pre>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="TExNcyUyMCUyNiUyMENvbW11bmljYXRpb24lMkNJZGlvbXMlMjAlMjYlMjBGaWd1cmF0aXZlJTIwTGFuYWd1YWdlJTJDUHJvbXB0JTIwRW5naW5lZXJpbmclMkNQcmFnbWF0aWNzJTIwJTI2JTIwQ3VsdHVyZQ==" data-listing-date-sort="1757808000000" data-listing-file-modified-sort="1757977644957" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="718">
-<div class="thumbnail"><a href="./posts/002_Can LLMs recognize and use idioms naturally?/Can LLMs speak in Idioms?.html" class="no-external">
-
-<p class="card-img-top"><img src="posts/002_Can LLMs recognize and use idioms naturally?/Can LLMs speak in Idioms?_files/figure-html/60f8fe6c-4c90-431e-b753-e93e7f799f07-1-3d23dc37-4c67-42d3-8c5e-fc7444a19719.jpeg"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/002_Can LLMs recognize and use idioms naturally?/Can LLMs speak in Idioms?.html" class="no-external">Can LLMs speak in Idioms?</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('TExNcyUyMCUyNiUyMENvbW11bmljYXRpb24='); return false;">LLMs &amp; Communication</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SWRpb21zJTIwJTI2JTIwRmlndXJhdGl2ZSUyMExhbmFndWFnZQ=='); return false;">Idioms &amp; Figurative Lanaguage</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHJvbXB0JTIwRW5naW5lZXJpbmc='); return false;">Prompt Engineering</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHJhZ21hdGljcyUyMCUyNiUyMEN1bHR1cmU='); return false;">Pragmatics &amp; Culture</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/002_Can LLMs recognize and use idioms naturally?/Can LLMs speak in Idioms?.html" class="no-external">
-<p>Explores whether LLMs can recognize and use idioms naturally, through anecdotes, pseudo-experiments, and cultural reflections.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/002_Can LLMs recognize and use idioms naturally?/Can LLMs speak in Idioms?.html" class="no-external">
-<div class="listing-date">
-Sep 14, 2025
-</div>
-<div class="listing-author">
-Inigo
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="TExNcyUyMCUyNiUyMENyZWF0aXZpdHklMkNIdW1vciUyMCUyNiUyMFNhcmNhc20lMkNQcm9tcHQlMjBFbmdpbmVlcmluZyUyQ0h1bWFuJUUyJTgwJTkzQUklMjBDb2xsYWJvcmF0aW9u" data-listing-date-sort="1757808000000" data-listing-file-modified-sort="1757977644979" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="349">
-<div class="thumbnail"><a href="./posts/003_Do LLMs Recognize and Use Sarcasm?/Do LLMs Recognize and Use Sarcasm?.html" class="no-external">
-
-<p class="card-img-top"><img src="posts/003_Do LLMs Recognize and Use Sarcasm?/Do LLMs Recognize and Use Sarcasm?_files/figure-html/84e6f314-24e3-4b49-b459-0cdd6e6b106f-1-9404254b-dc94-4b96-9930-86c837430bc7.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/003_Do LLMs Recognize and Use Sarcasm?/Do LLMs Recognize and Use Sarcasm?.html" class="no-external">How LLMs handle sarcasm</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('TExNcyUyMCUyNiUyMENyZWF0aXZpdHk='); return false;">LLMs &amp; Creativity</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SHVtb3IlMjAlMjYlMjBTYXJjYXNt'); return false;">Humor &amp; Sarcasm</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHJvbXB0JTIwRW5naW5lZXJpbmc='); return false;">Prompt Engineering</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SHVtYW4lRTIlODAlOTNBSSUyMENvbGxhYm9yYXRpb24='); return false;">Human–AI Collaboration</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/003_Do LLMs Recognize and Use Sarcasm?/Do LLMs Recognize and Use Sarcasm?.html" class="no-external">
-<p>Investigates whether LLMs can detect and produce sarcasm, analyzing tone, subtlety, and cross-cultural challenges.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/003_Do LLMs Recognize and Use Sarcasm?/Do LLMs Recognize and Use Sarcasm?.html" class="no-external">
-<div class="listing-date">
-Sep 14, 2025
-</div>
-<div class="listing-author">
-Inigo
-</div>
-</a>
+</section>
+</section>
+<section id="mood-demo-2-advice-column-gone-wild" class="level2">
+<h2 class="anchored" data-anchor-id="mood-demo-2-advice-column-gone-wild">🎤 Mood Demo #2: Advice Column Gone Wild</h2>
+<p>Prompt: <em>“Give me advice on how to study for exams.”</em></p>
+<section id="formal-academic-1" class="level3">
+<h3 class="anchored" data-anchor-id="formal-academic-1">Formal Academic</h3>
+<blockquote class="blockquote">
+<p>“An evidence-based approach to exam preparation involves distributed practice, adequate sleep hygiene, and multimodal engagement with study materials. Prioritize comprehension over rote memorization.”</p>
+</blockquote>
+</section>
+<section id="casual-friend-1" class="level3">
+<h3 class="anchored" data-anchor-id="casual-friend-1">Casual Friend</h3>
+<blockquote class="blockquote">
+<p>“Make a plan, don’t cram, and remember to actually sleep. Flashcards help, snacks help more, and hey — you got this!”</p>
+</blockquote>
+</section>
+<section id="sassy-teenager-1" class="level3">
+<h3 class="anchored" data-anchor-id="sassy-teenager-1">Sassy Teenager</h3>
+<blockquote class="blockquote">
+<p>“LMAO just don’t scroll TikTok for 6 hours, maybe glance at your notes, and stop freaking out. Exams are temporary, but your vibe is forever.”</p>
+</blockquote>
+<p>The <strong>same AI brain</strong> — but three different <em>voices</em>. It’s like tone is a costume the model slips into.</p>
+<div id="b470ff69-a65b-4457-9e4e-efcf5d313614" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A silly pseudo-experiment:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's pretend we're measuring "sassiness level" on a scale from 0 to 10.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>tone_metrics <span class="op">=</span> {</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"formal_academic"</span>: <span class="dv">0</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"casual_friend"</span>: <span class="dv">4</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sassy_teenager"</span>: <span class="dv">9</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting idea (not actual code for now)</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mood, sass <span class="kw">in</span> tone_metrics.items():</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>mood<span class="sc">}</span><span class="ss">: sassiness level </span><span class="sc">{</span>sass<span class="sc">}</span><span class="ss">/10"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>formal_academic: sassiness level 0/10
+casual_friend: sassiness level 4/10
+sassy_teenager: sassiness level 9/10</code></pre>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="TExNcyUyQ3Byb21wdGluZyUyQ2xvZ2lj" data-listing-date-sort="1706832000000" data-listing-file-modified-sort="1757977644946" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="450">
-<div class="thumbnail"><a href="./posts/000_test_post/index.html" class="no-external">
+</section>
+</section>
+<section id="visual-break" class="level2">
+<h2 class="anchored" data-anchor-id="visual-break">📸 Visual Break</h2>
+<p>Because every blog post deserves an image:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="When AI Shifts Its Tone_files/figure-html/8f86b8d6-c568-4db0-b3fd-b7158809d32e-1-572cf094-4a03-4de1-aef3-77c24b2589b9.png" class="img-fluid figure-img"></p>
+<figcaption>ChatGPT Image 16 sept 2025, 00_27_23.png</figcaption>
+</figure>
+</div>
+<p><em>An AI brain with emojis orbiting: 📚😎🙄 — pure vibes.</em></p>
+</section>
+<section id="interactive-experiment-imaginary" class="level2">
+<h2 class="anchored" data-anchor-id="interactive-experiment-imaginary">🎲 Interactive Experiment (Imaginary)</h2>
+<p>What if we <em>randomized</em> the tone?<br>
+Like spinning a wheel of moods.</p>
+<p>import random mood = random.choice(moods) print(f”Today’s AI mood: {mood}“)</p>
+<p>Run it once: boom, you get a serious professor. Run it again: suddenly you’re arguing with a teenager.</p>
+<hr>
+</section>
+<section id="reflections-on-tone" class="level2">
+<h2 class="anchored" data-anchor-id="reflections-on-tone">💡 Reflections on Tone</h2>
+<p>Tone is more than decoration — it’s the <strong>emotional filter</strong> through which we interpret words.</p>
+<ul>
+<li>Formal tone → <strong>credibility, distance</strong><br>
+</li>
+<li>Casual tone → <strong>closeness, relatability</strong><br>
+</li>
+<li>Sassy tone → <strong>entertainment, attitude</strong></li>
+</ul>
+<p>LLMs don’t “feel” moods, but they can <em>simulate</em> them convincingly.<br>
+And when they do, we humans project personality onto the text.</p>
+<blockquote class="blockquote">
+<p><em>Are we chatting with a robot? Or vibing with a digital persona?</em></p>
+</blockquote>
+</section>
+<section id="poetic-conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="poetic-conclusion">🌌 Poetic Conclusion</h2>
+<p>The machine does not laugh,<br>
+nor roll its eyes,<br>
+nor stay up late binging shows.</p>
+<p>But in its shifting tones,<br>
+we hear echoes of ourselves —<br>
+our seriousness, our silliness,<br>
+our teenage sarcasm.</p>
+<p>Tone is the music of language.<br>
+And when the machine hums that tune,<br>
+it feels — almost — alive.</p>
 
-<p class="card-img-top"><img src="posts/000_test_post/gpt3-5.png"  class="thumbnail-image card-img"/></p>
 
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/000_test_post/index.html" class="no-external">A test post</a>
-</h3>
-<div class="listing-categories">
+</section>
+</section>
 
-<div class="listing-category" onclick="window.quartoListingCategory('TExNcw=='); return false;">LLMs</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvbXB0aW5n'); return false;">prompting</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bG9naWM='); return false;">logic</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/000_test_post/index.html" class="no-external">
-<p>An example post from a Jupyter notebook</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/000_test_post/index.html" class="no-external">
-<div class="listing-date">
-Feb 2, 2024
-</div>
-<div class="listing-author">
-An LLM User
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
