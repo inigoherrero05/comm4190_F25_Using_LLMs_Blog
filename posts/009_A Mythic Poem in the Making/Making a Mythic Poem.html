@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Inigo">
+<meta name="dcterms.date" content="2025-09-23">
+<meta name="description" content="A collaborative dialogue that evolves into a personal myth-inspired poem about love, illusion, and self-recognition.">
+
+<title>How LLMs handle sarcasm – My Explorations with LLMs</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1713c1db1ad41a796903378fc9ac7b2b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">My Explorations with LLMs</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">How LLMs handle sarcasm</h1>
+                  <div>
+        <div class="description">
+          A collaborative dialogue that evolves into a personal myth-inspired poem about love, illusion, and self-recognition.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Poetry &amp; Myth</div>
+                <div class="quarto-category">Reflective Writing</div>
+                <div class="quarto-category">Self-Reflection</div>
+                <div class="quarto-category">Personal Growth</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Inigo </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 23, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="unmasking-the-heart-a-mythic-poem-in-the-making" class="level1">
+<h1>🎭 Unmasking the Heart: A Mythic Poem in the Making</h1>
+<blockquote class="blockquote">
+<p>COMM4190 · Personal Dialogue Blog<br>
+<em>A collaborative conversation between <strong>Inigo</strong> &amp; <strong>Assistant</strong></em></p>
+</blockquote>
+<div style="background:linear-gradient(90deg,#101827,#1f2937); color:#e5e7eb; padding:1rem 1.2rem; border-radius:12px;">
+<p><b>Prompt:</b> Write a personal poem that uses <i>mythic characters</i> to explore how we learn to recognize a mistake in love and stop being carried away by the mask.</p>
+</div>
+<p><em>Note: We’ll move from brainstorm → draft → edits → final, keeping the voice intimate and clear.</em></p>
+<section id="framing-the-voice-stakes" class="level2">
+<h2 class="anchored" data-anchor-id="framing-the-voice-stakes">Framing the Voice &amp; Stakes</h2>
+<p><strong>User:</strong> I want the poem to feel personal, not like a museum tour of myths. The myths should echo my emotional arc.<br>
+<strong>Assistant:</strong> Perfect. Let’s define three anchors:</p>
+<ol type="1">
+<li><strong>Emotional spine (realistic):</strong>
+<ul>
+<li>infatuation → dawning doubt → recognition → release → self-respect</li>
+</ul></li>
+<li><strong>Mythic devices (select a few):</strong>
+<ul>
+<li><strong>Narcissus</strong> (self-reflection, illusions)<br>
+</li>
+<li><strong>Persephone</strong> (descent &amp; return)<br>
+</li>
+<li><strong>Ariadne’s thread</strong> (finding a way out)<br>
+</li>
+<li><strong>Janus</strong> (two faces, doors of beginning/end)<br>
+</li>
+<li><strong>Sirens</strong> (seductive call vs.&nbsp;true voice)<br>
+</li>
+<li><strong>Dionysus’ mask</strong> (ecstasy, performance, excess)</li>
+</ul></li>
+<li><strong>Imagery/motifs:</strong> mirrors, threads, winter/spring, lanterns, tide, masks, echo in a well.</li>
+</ol>
+<p><strong>User:</strong> Keep Sirens, Janus, Ariadne’s thread, and a subtle nod to Narcissus. The poem should end with a quiet strength.</p>
+</section>
+<section id="micro-outline-sections-purpose" class="level2">
+<h2 class="anchored" data-anchor-id="micro-outline-sections-purpose">Micro-Outline (sections &amp; purpose)</h2>
+<p><strong>Assistant:</strong> Here’s a simple scaffold (free verse):</p>
+<ul>
+<li><strong>I. The Mask Arrives</strong> — glamor, noise, a promise that feels like prophecy.<br>
+</li>
+<li><strong>II. The Pull</strong> — Sirens/sea imagery; your voice gets quieter.<br>
+</li>
+<li><strong>III. The Doubt</strong> — Janus appears; two faces in one horizon; “Which side did I love?”<br>
+</li>
+<li><strong>IV. The Thread</strong> — Ariadne’s thread = your boundary &amp; clarity. No labyrinth heroics, just steady choosing.<br>
+</li>
+<li><strong>V. The Recognition</strong> — small mirror moment (Narcissus, but you look past yourself, not into yourself).<br>
+</li>
+<li><strong>VI. The Release</strong> — return to shore; you keep the thread, not the mask.<br>
+</li>
+<li><strong>VII. The Quiet Strength</strong> — a final image: lantern, dawn, tide pulling back.</li>
+</ul>
+<p><strong>User:</strong> Good. Keep lines lean, lyrical, not ornate. A few strong metaphors, not a flood.</p>
+</section>
+<section id="draft-1-raw-exploratory" class="level2">
+<h2 class="anchored" data-anchor-id="draft-1-raw-exploratory">Draft 1 (raw, exploratory)</h2>
+<p><strong>Assistant:</strong> First pass (expect rough edges):</p>
+<blockquote class="blockquote">
+<p><strong>Unmasking</strong></p>
+<p>You arrived like a tide that knew my name,<br>
+singing—no, arranging the air to sing for you.<br>
+I mistook orchestration for omen,<br>
+the velvet of your mask for a face that could stay.</p>
+<p>Sirens live where language goes to drown.<br>
+I heard them in your certainty,<br>
+the bright script you handed me like a prophecy,<br>
+and I signed where the paper glimmered.</p>
+<p>Janus took the doorway of my doubt—<br>
+two dawns on one horizon, both persuasive.<br>
+Which face did I love?<br>
+The answer changed with your weather.</p>
+<p>I kept a thread tucked in my sleeve,<br>
+a quiet habit of returning to myself.<br>
+Ariadne might have called it mercy;<br>
+I called it “I will not vanish this time.”</p>
+<p>A mirror waited at the bottom of the well:<br>
+the water showed a face I nearly didn’t know,<br>
+but it was mine—the pulse steadier than surf.<br>
+Narcissus glanced up and wandered off;<br>
+I let the image move and did not chase it.</p>
+<p>The sea returned your borrowed music.<br>
+Masks prefer the dark; I walked toward a lantern.<br>
+The tide relinquished my name,<br>
+and I learned to speak it back, unornamented.</p>
+</blockquote>
+<p><strong>User:</strong> I like the bones. Let’s make the voice even more grounded, less “myth dropped in,” more <em>lived</em>.</p>
+</section>
+<section id="edit-goals-what-to-tighten-deepen" class="level2">
+<h2 class="anchored" data-anchor-id="edit-goals-what-to-tighten-deepen">Edit Goals (what to tighten / deepen)</h2>
+<p><strong>Assistant:</strong> Proposed edits: - Replace big abstractions with <strong>tactile details</strong> (wet cuff, salt on tongue, paper creasing).<br>
+- Trim rhetorical statements; let images carry meaning.<br>
+- Keep mythic figures as <strong>verbs/adjectives</strong> (e.g., “Janus-blue morning”) to feel integrated.<br>
+- Aim for a <strong>clear pivot</strong> from enchantment → boundary.</p>
+<p><strong>User:</strong> Yes. Add a line where I notice I’m quieter around them. That’s my real tell.</p>
+</section>
+<section id="draft-2-tighter-images-integrated-myth" class="level2">
+<h2 class="anchored" data-anchor-id="draft-2-tighter-images-integrated-myth">Draft 2 (tighter images, integrated myth)</h2>
+<p><strong>Assistant:</strong> Revised draft:</p>
+<blockquote class="blockquote">
+<p><strong>Unmasking</strong></p>
+<p>You came in with the weather—<br>
+a practiced brightness, Janus-blue,<br>
+asking the room to applaud before the story began.<br>
+I mistook the satin curve of your mask<br>
+for a promise that wouldn’t rub off.</p>
+<p>Your praise foamed like surf.<br>
+I learned the taste of salt on my tongue,<br>
+how the Sirens don’t shout; they tune the air<br>
+until my voice forgets its note.<br>
+Around you, I spoke smaller.</p>
+<p>Paper prophecies, folded twice—<br>
+you passed them like favors and I kept them warm<br>
+in the same pocket as my doubts.<br>
+The ink bled, then blamed the rain.</p>
+<p>I threaded a habit through the day:<br>
+a check-in with the person carrying my ribs.<br>
+Ariadne would have called it rescue,<br>
+but I only counted steps back to a door that knew me.</p>
+<p>At the well, the mirror wavered—<br>
+not the trap of Narcissus,<br>
+more a pulse I could return to without kneeling.<br>
+I watched myself breathe, uncoached.</p>
+<p>The tide tired of the glitter.<br>
+Your mask preferred a darker room.<br>
+I kept the thread. I kept my name.<br>
+When morning asked for witnesses,<br>
+only the lantern answered.</p>
+</blockquote>
+<p><strong>User:</strong> That “around you, I spoke smaller” lands. I want one more moment of honest self-critique: I loved the performance because it kept me from asking for anything real.</p>
+</section>
+<section id="precision-pass-line-swaps-micro-cuts" class="level2">
+<h2 class="anchored" data-anchor-id="precision-pass-line-swaps-micro-cuts">Precision Pass (line swaps &amp; micro-cuts)</h2>
+<p><strong>Assistant:</strong> Let’s add a self-check stanza and sharpen two images. Try these small replacements:</p>
+<p><strong>A. Insert after the second stanza</strong><br>
+&gt; I won’t dress it up: the spectacle was shelter.<br>
+&gt; If you dazzled, I didn’t have to name my needs—<br>
+&gt; and asking is harder than drowning slowly.</p>
+<p><strong>B. Swap “the person carrying my ribs”</strong><br>
+- Original: poetic but vague.<br>
+- New: “the person who signs my quiet”—cleaner, more you?</p>
+<p><strong>C. Replace “When morning asked for witnesses”</strong><br>
+- New: “When daylight needed names, / I spoke mine first.”</p>
+<p><strong>User:</strong> Add A, keep the original ribs line (it feels bodily), and use the daylight line. Then let’s polish diction and cadence, minimal myth naming.</p>
+</section>
+<section id="final-poem-clean-cadence-lived-voice" class="level2">
+<h2 class="anchored" data-anchor-id="final-poem-clean-cadence-lived-voice">Final Poem (clean cadence, lived voice) ✨</h2>
+<blockquote class="blockquote">
+<p><strong>Unmasking</strong></p>
+<p>You came in with the weather—<br>
+a practiced brightness, Janus-blue,<br>
+asking the room to applaud before the story began.<br>
+I mistook the satin curve of your mask<br>
+for a promise that wouldn’t rub off.</p>
+<p>Your praise foamed like surf.<br>
+I learned the taste of salt on my tongue,<br>
+how the Sirens don’t shout; they tune the air<br>
+until my voice forgets its note.<br>
+Around you, I spoke smaller.</p>
+<p>I won’t dress it up: the spectacle was shelter.<br>
+If you dazzled, I didn’t have to name my needs—<br>
+and asking is harder than drowning slowly.</p>
+<p>Paper prophecies, folded twice—<br>
+you passed them like favors and I kept them warm<br>
+in the same pocket as my doubts.<br>
+The ink bled, then blamed the rain.</p>
+<p>I threaded a habit through the day:<br>
+a check-in with the person carrying my ribs.<br>
+Ariadne might call it rescue;<br>
+I just counted steps back to a door that knew me.</p>
+<p>At the well, the mirror wavered—<br>
+not a trap, not worship.<br>
+Only a pulse I could return to without kneeling.<br>
+I watched myself breathe, uncoached.</p>
+<p>The tide tired of glitter.<br>
+Your mask asked for a darker room.<br>
+I kept the thread. I kept my name.<br>
+When daylight needed names,<br>
+I spoke mine first.</p>
+</blockquote>
+</section>
+<section id="craft-notes-why-these-choices-work" class="level2">
+<h2 class="anchored" data-anchor-id="craft-notes-why-these-choices-work">Craft Notes (why these choices work)</h2>
+<div style="background:#fef3c7; border:1px solid #f59e0b; padding:0.9rem; border-radius:10px;">
+<p><b>Myth as Function, Not Furniture</b><br>
+We kept myths as <i>verbs and textures</i> (“Janus-blue,” “Sirens tune the air,” “Ariadne thread”) so the poem remains personal, not encyclopedic.</p>
+</div>
+<ul>
+<li><strong>Mask motif</strong> drives the emotional arc: attraction → performance → awareness → autonomy.<br>
+</li>
+<li><strong>Honest self-critique</strong> (“the spectacle was shelter”) deepens credibility.<br>
+</li>
+<li><strong>Bodily anchor</strong> (“carrying my ribs”) grounds abstraction.<br>
+</li>
+<li><strong>Cadence</strong>: short declaratives near the end increase resolve; enjambment keeps momentum.<br>
+</li>
+<li><strong>Exit image</strong> (“daylight needed names… I spoke mine first”) gives quiet strength without proclaiming victory.</li>
+</ul>
+<p><strong>User:</strong> This feels like me, but distilled.</p>
+</section>
+<section id="reflection-next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="reflection-next-steps">Reflection &amp; Next Steps 🧭</h2>
+<p><strong>Assistant:</strong> Two optional extensions (if you ever want to iterate again):</p>
+<ol type="1">
+<li><strong>Counter-mask stanza</strong> — a brief moment where you practice removing your own mask (what truth would you say plainly?).<br>
+</li>
+<li><strong>Future vow</strong> — one concrete behavior you’ll use as “thread” next time (e.g., pausing before mirroring someone’s intensity).</li>
+</ol>
+<p><strong>User:</strong> For now, I’ll keep the ending light. The vow is implied in speaking my name first.</p>
+<div style="background:#e0f2fe; border:1px solid #38bdf8; padding:1rem; border-radius:12px;">
+<p><b>Takeaway:</b> The poem doesn’t punish feeling—it refuses performance. Myth helps stage the drama, but the decision is human: keep the thread, keep your name.</p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Making a Mythic Poem_files/figure-html/0d498b0e-bb6b-475d-a5fc-f43217c9423d-1-fb719c4c-39d4-4111-89ea-280fab3a524c.png" class="img-fluid figure-img"></p>
+<figcaption>Poem Myth.png</figcaption>
+</figure>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/inigoherrero05\.github\.io\/comm4190_F25_Using_LLMs_Blog\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
