@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Inigo">
+<meta name="dcterms.date" content="2025-09-23">
+<meta name="description" content="A playful deep-dive into whether LLMs can interpret emojis as figurative language. Through stories, pseudo-experiments, and emoji-heavy prompts, the blog explores where AI shines, where it hilariously fails, and what that says about human-machine communication.">
 
-<title>led – My Explorations with LLMs</title>
+<title>LLMs interpretation of Emojis – My Explorations with LLMs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -114,7 +152,46 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block"></header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">LLMs interpretation of Emojis</h1>
+                  <div>
+        <div class="description">
+          A playful deep-dive into whether LLMs can interpret emojis as figurative language. Through stories, pseudo-experiments, and emoji-heavy prompts, the blog explores where AI shines, where it hilariously fails, and what that says about human-machine communication.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">LLMs &amp; Communication</div>
+                <div class="quarto-category">Emojis &amp; Figurative Lanaguag</div>
+                <div class="quarto-category">Prompt Engineering</div>
+                <div class="quarto-category">Humour &amp; Misunderstandings</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Inigo </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 23, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
@@ -124,14 +201,185 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+
+<section id="emoji-vs.-words-do-llms-understand-visual-figurative-language" class="level1">
+<h1><span style="font-family:Georgia; font-size:2.3rem;">Emoji vs.&nbsp;Words: Do LLMs Understand Visual Figurative Language? 🤖✨📱</span></h1>
+<blockquote class="blockquote">
+<p>COMM4190 · Prompt/Response &amp; Readings Blog<br>
+By: Inigo Herrero Week 3 — Emojis, Metaphors &amp; Mischief</p>
+</blockquote>
+<hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="006led_files/figure-html/34eddcc6-a5b4-4ece-9d51-8bb02f8914c0-1-65d37b75-456d-4503-af17-1dcfbf4849b3.png" class="img-fluid figure-img"></p>
-<figcaption>image.png</figcaption>
+<p><img src="Emojis vs Words_files/figure-html/a66ab4bf-44c2-4410-9422-33cf619179cd-1-6878d096-b767-42b1-b056-9aad5e60bb0d.png" class="img-fluid figure-img"></p>
+<figcaption>AI_Emojis.png</figcaption>
+</figure>
+</div>
+<div style="background-color:#f0f8ff; padding:1rem; border-radius:10px;">
+<p>We threw emojis at an LLM and asked:<br>
+- Does it get metaphors like 🐘 in the room?<br>
+- Can it use emojis creatively in replies?<br>
+- Will it confuse 🍑 (fruit) with 🍑 (not fruit)?</p>
+<p>Result? Half genius, half comedy show.</p>
+</div>
+<section id="scene-1-setting-the-stage" class="level2">
+<h2 class="anchored" data-anchor-id="scene-1-setting-the-stage">🎬 Scene 1 — Setting the Stage</h2>
+<p>Once upon a late-night text thread, my friend messaged:<br>
+<em>“I can’t come, my brain is 🥦 tonight.”</em></p>
+<p>I stared at my phone. Broccoli? What does that mean? Healthy? Green? Dense?</p>
+<p>It turns out she just meant <em>“fried.”</em></p>
+<p>Language is wild. But emojis? They’re like metaphors wearing costumes.<br>
+So I asked: what happens when we feed this chaos to an LLM?</p>
+<div id="80fef783-77af-4290-a4c4-ea31f43d12d0" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">## 🧪 Scene 2 — Experimental Setup (Pseudo-code)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>We’ll mock a mini<span class="op">-</span>lab where we throw emoji<span class="op">+</span>word combos at a model.</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># pseudo experiment: emoji interpretation</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>emoji_tests <span class="op">=</span> [</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"He's the 🐘 in the room."</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Don't spill the ☕."</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"My brain is 🥦."</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"The deal went 🐟y."</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Our love is 🔥 but also ⛄."</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> emoji_tests:</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> LLM(prompt<span class="op">=</span><span class="st">"Interpret this figurative emoji phrase: "</span> <span class="op">+</span> t)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    log(response)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Expected behavior:</p>
+<p>🐘 in the room → “obvious problem”</p>
+<p>☕ → gossip</p>
+<p>🥦 → ??? chaos</p>
+<p>🐟y → fishy/suspicious</p>
+<p>🔥 + ⛄ → paradox of hot/cold love</p>
+<p>Reality? Sometimes spot on, sometimes broccoli.</p>
+</section>
+<section id="scene-3-storytelling-break-the-emoji-misunderstanding" class="level2">
+<h2 class="anchored" data-anchor-id="scene-3-storytelling-break-the-emoji-misunderstanding">😂 Scene 3 — Storytelling Break: The Emoji Misunderstanding</h2>
+<p>A true(ish) story:<br>
+I once sent a date this text after dinner:<br>
+<em>“Thanks for the night 🌙✨🍷🦄.”</em></p>
+<p>She replied:<br>
+<em>“…why unicorn?”</em></p>
+<p>And I thought: isn’t it obvious? Unicorn = magical evening!<br>
+But to her, it looked like I was calling her a mythical horse.</p>
+<p>This is where LLMs live too: between magic and misreadings.</p>
+</section>
+<section id="scene-4-layered-meaning-with-emojis" class="level2">
+<h2 class="anchored" data-anchor-id="scene-4-layered-meaning-with-emojis">🧩 Scene 4 — Layered Meaning with Emojis</h2>
+<p>Emojis aren’t just cute add-ons. They work like <em>visual idioms</em>.<br>
+- Literal layer: 🍎 = apple.<br>
+- Figurative layer: 🍎 = health, education, temptation.<br>
+- Cultural layer: 🍎 = New York, “the Big Apple.”</p>
+<p>LLMs trained on tons of data can catch common ones — but the subtler the layer, the more likely they’ll fall flat.</p>
+<blockquote class="blockquote">
+<p>Example:<br>
+<em>“He went full 🥒 during the meeting.”</em><br>
+- US slang: chill.<br>
+- Elsewhere: confused.</p>
+</blockquote>
+</section>
+<section id="scene-5-generation-test" class="level2">
+<h2 class="anchored" data-anchor-id="scene-5-generation-test">👾 Scene 5 — Generation Test</h2>
+<p>What if we ask an LLM to <em>produce</em> emoji-based figurative speech?</p>
+<div id="06f9115c-2ca8-4bae-ad45-250767bd3942" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generation test</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">Write a breakup text using mostly emojis, but make sure it</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">conveys 'we grew apart, but I wish you well.'</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> LLM(prompt)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># expected output: "🌱➡️🌳 | 😔💔 | 🙏💫"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Humans might laugh, cry, or both. LLMs? They usually overdo it: “💔💔💔😢😭🌪️🔥” — like a telenovela written by a keyboard.</p>
+</section>
+<section id="scene-6-cross-cultural-chaos" class="level2">
+<h2 class="anchored" data-anchor-id="scene-6-cross-cultural-chaos">🌍 Scene 6 — Cross-Cultural Chaos</h2>
+<p>Fun fact: not all emojis mean the same everywhere.<br>
+- 🙏 in the US = “thank you”<br>
+- 🙏 in Japan = “please/namaste”<br>
+- 🙏 in some contexts = “high five”</p>
+<p>Now imagine an LLM trying to juggle that without tone of voice.<br>
+It’s like walking into a party where everyone’s waving different flags but using the same pole. markdown Copiar código</p>
+</section>
+<section id="scene-7-creative-experiment-emoji-poetry" class="level2">
+<h2 class="anchored" data-anchor-id="scene-7-creative-experiment-emoji-poetry">🎨 Scene 7 — Creative Experiment: Emoji Poetry</h2>
+<p><strong>User Prompt:</strong><br>
+<em>“Write a haiku only with emojis about Monday mornings.”</em></p>
+<p><strong>LLM Attempt:</strong><br>
+☕🌅😴<br>
+🚇👔💼💻<br>
+📅🔁😩</p>
+<p>Weirdly, that works. Minimalist despair, but poetic.</p>
+</section>
+<section id="scene-8-why-do-emojis-trip-llms" class="level2">
+<h2 class="anchored" data-anchor-id="scene-8-why-do-emojis-trip-llms">🔍 Scene 8 — Why Do Emojis Trip LLMs?</h2>
+<p>Three big reasons:</p>
+<ol type="1">
+<li><strong>Data Bias</strong>: Training corpora underrepresent emojis compared to text.<br>
+</li>
+<li><strong>Ambiguity</strong>: One 🍑 = fruit, another 🍑 = peachy behind.<br>
+</li>
+<li><strong>Context Loss</strong>: Emojis rely on <em>tone</em> and <em>shared culture</em>.</li>
+</ol>
+<p>So models either:<br>
+- Over-literalize (🥦 = broccoli, period).<br>
+- Over-dramatize (🔥 = passion, hellfire, apocalypse).</p>
+</section>
+<section id="scene-9-prompt-engineering-tricks" class="level2">
+<h2 class="anchored" data-anchor-id="scene-9-prompt-engineering-tricks">💡 Scene 9 — Prompt Engineering Tricks</h2>
+<p>Let’s hack it: can better prompts save emoji metaphors?</p>
+<div id="da35a569-dabb-46c8-9d92-916a3bfbdba5" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prompt engineering</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">Interpret emojis figuratively, not literally. Provide 2 possible meanings</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">(cultural + emotional). Input: "Don't spill the ☕."</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> LLM(prompt)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># expected output:</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Gossip, sharing secrets</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Literal coffee</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="scene-10-narrative-emojis-as-secret-codes" class="level2">
+<h2 class="anchored" data-anchor-id="scene-10-narrative-emojis-as-secret-codes">🎭 Scene 10 — Narrative: Emojis as Secret Codes</h2>
+<p>In middle school, we passed notes with weird doodles —<br>
+🌵 = “meet at lockers,”<br>
+🐙 = “teacher’s watching,”<br>
+🍕 = “bring snacks.”</p>
+<p>Now we do the same thing, but with 280 characters and emojis.<br>
+LLMs are outsiders reading our inside jokes. Sometimes they guess. Sometimes they ruin the punchline.</p>
+</section>
+</section>
+<section id="conclusion-poetic-reflection" class="level1">
+<h1>🌌 Conclusion — Poetic Reflection</h1>
+<p>In the end, emojis are our <em>tiny hieroglyphs of feeling.</em><br>
+They live halfway between language and art, between broccoli and brilliance.</p>
+<p>LLMs try. They stumble, they overact, they miss the wink.<br>
+But sometimes, just sometimes, they give us a line of pure emoji poetry that feels human.</p>
+<blockquote class="blockquote">
+<p>🌱➡️🌳<br>
+We grow.</p>
+<p>💫✨<br>
+And leave echoes of ourselves, even in pixels.</p>
+</blockquote>
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Emojis vs Words_files/figure-html/789b930a-b216-4699-bd10-0bb5e18dd40f-1-f2e5e2f5-379f-4bab-9cb6-8722bff7ce10.png" class="img-fluid figure-img"></p>
+<figcaption>Final Conclusion.png</figcaption>
 </figure>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
