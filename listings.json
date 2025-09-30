@@ -2,15 +2,18 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/012_AI Feeling/AI Having Feelings.html",
+      "/posts/011_Biases in LLMs/LLMs Biases.html",
+      "/posts/010_A Zoomer Chat/A Zoomer Chat.html",
       "/posts/007_Emojis vs  LLMs/Emojis vs Words.html",
-      "/posts/009_A Mythic Poem in the Making/Making a Mythic Poem.html",
       "/posts/008_Reflection on Love/Reflection On Love and Signals.html",
+      "/posts/009_A Mythic Poem in the Making/Making a Mythic Poem.html",
       "/posts/006_How LLMs Help Us Write Poems/Poems_AI.html",
       "/posts/004_When AI Shifts Its Tone/tone.html",
-      "/posts/003_Do LLMs Recognize and Use Sarcasm/sarcasm.html",
-      "/posts/001_Brands & LLMs/branding.html",
       "/posts/002_Can LLMs recognize and use idioms naturally/idioms.html",
-      "/posts/005_Can a Large Language Model Create New Proverbs/proverbs.html"
+      "/posts/001_Brands & LLMs/branding.html",
+      "/posts/005_Can a Large Language Model Create New Proverbs/proverbs.html",
+      "/posts/003_Do LLMs Recognize and Use Sarcasm/sarcasm.html"
     ]
   }
 ]
