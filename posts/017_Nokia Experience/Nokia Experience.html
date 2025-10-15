@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Inigo">
+<meta name="dcterms.date" content="2025-10-15">
+<meta name="description" content="Set around a year and a half living with a Nokia keypad phone and the tension between personal peace and others’ peace of mind.">
+
+<title>My Experience with a keyboard phone: Nokia – My Explorations with LLMs</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">My Explorations with LLMs</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/i%C3%B1igo-herrero-382806305/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">My Experience with a keyboard phone: Nokia</h1>
+                  <div>
+        <div class="description">
+          Set around a year and a half living with a Nokia keypad phone and the tension between personal peace and others’ peace of mind.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Critical Reflection</div>
+                <div class="quarto-category">Human Affection</div>
+                <div class="quarto-category">Reflection &amp; Philosophy</div>
+                <div class="quarto-category">Communication</div>
+                <div class="quarto-category">Ethics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Inigo </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 15, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="peace-pings-and-the-person-im-becoming" class="level1">
+<h1>✨ Peace, Pings, and the Person I’m Becoming</h1>
+<style>
+/* playful, subtle theming for Jupyter markdown */
+:root {
+  --bg: #0f1226;
+  --card: #191d3a;
+  --ink: #e6e9ff;
+  --accent: #9ae6b4;
+  --accent2: #a78bfa;
+  --muted: #a0a3c0;
+}
+body, .jp-Notebook, .jp-Cell {
+  background: linear-gradient(160deg, var(--bg) 0%, #0b0d1b 100%) !important;
+  color: var(--ink) !important;
+  font-family: "Inter", "IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.65;
+}
+h1, h2, h3, h4 {
+  color: var(--accent);
+  letter-spacing: .3px;
+  text-shadow: 0 0 12px rgba(154,230,180,.15);
+}
+a { color: var(--accent2) !important; text-decoration: none; border-bottom: 1px dotted var(--accent2); }
+blockquote {
+  border-left: 3px solid var(--accent2);
+  padding-left: 1rem; color: var(--muted); background: rgba(167,139,250,.08); border-radius: .5rem;
+}
+hr { border-color: rgba(255,255,255,.08); }
+ul li::marker { color: var(--accent2); }
+code, pre { background: #0a0d1f !important; color: #d6d9ff !important; border-radius: .5rem; }
+.kbd {
+  background: #101431; border: 1px solid #262b55; border-bottom-width: 3px; padding: .15rem .4rem; border-radius: .35rem; font-weight: 600;
+}
+.callout {
+  background: linear-gradient(180deg, rgba(154,230,180,.08), rgba(167,139,250,.07));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 1rem; padding: 1rem 1.2rem; margin: 1rem 0;
+}
+.small { color: var(--muted); font-size: .95rem; }
+</style>
+<p><strong>Prompt:</strong> I spent a year and a half with a Nokia keypad phone that only makes calls. It was the happiest, most self-developing time of my life. But it felt selfish: I missed people’s WhatsApps; I seemed to vanish. How do I reconcile <em>my</em> calm with <em>their</em> calm?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Nokia Experience_files/figure-html/4787e26c-8d30-41bb-9a52-63783d60b67a-1-e4b164ea-7e50-44f3-be18-a6fdd1c53b53.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<p><em>We begin at a kitchen table. The Nokia is face-down like a polished pebble. The AI is a soft cursor, blinking.</em></p>
+<blockquote class="blockquote">
+<p><strong>AI:</strong> You traded dopamine loops for dawn light. That sounds like a fair deal.<br>
+<strong>Me:</strong> It was. I read more, walked more, cooked in silence. But when I don’t reply, the people I love feel like ghosted extras in my private movie.<br>
+<strong>AI:</strong> So the problem isn’t contact; it’s cadence.</p>
+</blockquote>
+<p><strong>Idea:</strong> Can I design a life with <em>few, deep, predictable</em> channels so I’m steady for myself <em>and</em> findable for others?</p>
+<div id="e4d97116-cc1a-4546-b04f-6f05133b8f37" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudo-Plan A: "Cadence over Chaos"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Goal: balance (self_peace) and (others_tranquility) by explicit rhythms</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>define SELF_PEACE <span class="op">:=</span> high when interruptions are few, attention <span class="kw">is</span> single<span class="op">-</span>threaded</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>define OTHERS_TRANQUILITY <span class="op">:=</span> high when response expectations are clear <span class="op">+</span> reasonable</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># knobs we can tune</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>window_reply <span class="op">=</span> { days: [Mon, Thu], times: [<span class="dv">18</span>:<span class="dv">00</span><span class="op">-</span><span class="dv">19</span>:<span class="dv">00</span>] }      <span class="co"># predictable reply block</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>channels <span class="op">=</span> [<span class="st">"calls"</span>, <span class="st">"1 curated chat group"</span>, <span class="st">"email (weekly digest)"</span>]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>status_message <span class="op">=</span> <span class="st">"I’m reachable by call any day 18–19h; WhatsApp checked Mon/Thu."</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># algorithm</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>function daily_routine():</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    deep_work_blocks <span class="op">=</span> [<span class="dv">0</span><span class="er">8</span>:<span class="dv">00</span><span class="op">-</span><span class="dv">11</span>:<span class="dv">00</span>, <span class="dv">14</span>:<span class="dv">00</span><span class="op">-</span><span class="dv">16</span>:<span class="dv">30</span>]</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    silence_mode <span class="op">:=</span> ON during deep_work_blocks</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> now <span class="kw">in</span> window_reply: open_whatsapp()<span class="op">;</span> respond <span class="kw">in</span> batches<span class="op">;</span> close_app()</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>function escalation_path(msg):</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> urgent(msg): call_me()</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: wait_for_window_reply</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># evaluate</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> weighted_sum(SELF_PEACE↑, OTHERS_TRANQUILITY↑)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> score</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="scenes-from-a-low-notification-life" class="level2">
+<h2 class="anchored" data-anchor-id="scenes-from-a-low-notification-life">Scenes from a low-notification life</h2>
+<blockquote class="blockquote">
+<p><strong>Friend (audio):</strong> “Bro… you vanish. Are you okay?”<br>
+<strong>Me:</strong> “I am. The Nokia is a monastery bell—rings rarely, means something.”<br>
+<strong>Friend:</strong> “But I don’t know <em>when</em> to reach you.”<br>
+<strong>AI:</strong> “Uncertainty hurts more than silence. Swap randomness for ritual.”</p>
+</blockquote>
+<p><strong>Micro-experiments:</strong> - <strong>Predictable availability:</strong> Two reply windows per week + any-time <strong>calls</strong> for true urgency.<br>
+- <strong>Channel pruning:</strong> Archive old groups; keep one family chat, one close-friends chat.<br>
+- <strong>Visible scaffolding:</strong> Pin a short note: <em>“Llego los lunes y jueves 18–19h. Si es urgente, llámame.”</em><br>
+- <strong>Care tokens:</strong> Once a week, long-form voice notes to 3 people who matter most.</p>
+<blockquote class="blockquote">
+<p><strong>AI:</strong> “You didn’t disappear; you de-randomized. Now make it legible.”</p>
+</blockquote>
+<p>I keep wondering why you—an LLM—sound so patient about my Nokia monasticism. Maybe it’s because your “personality” is a mirror with grammar. You don’t have cravings or friends; you have <strong>loss functions</strong>. When I say <em>was I selfish?</em>, you don’t feel offense on behalf of my friends; you pattern-match: “selfish” relates to fairness, reciprocity, expectations. You retrieve adjacent notions: <em>cadence, predictability, social contracts.</em> From there, you generate with a bias toward coherence, safety, and usefulness. If I confess that the Nokia made me happier while making others anxious, your training leans into <strong>tension-resolution</strong> structures: identify stakeholders, propose norms, minimize regret. It feels empathic, but it’s more like <em>gradient descent on ambiguity</em>.</p>
+<p>You also behave the way you do because of how your incentives are set. You tend to avoid absolutes—no “ditch your friends or ditch your phone.” That’s not because you’re wise; it’s because extremal advice fails on average. You prefer <strong>Pareto-ish</strong> compromises. When I ask, <em>Should I prioritize my peace or their peace?</em>, you expand the option set: pacing, channels, response windows, escalation paths. You surface <strong>design patterns</strong> rather than verdicts. Inside the black box, this is token-by-token next-word prediction conditioned on a vast anthology of social scripts: productivity blogs, psych threads, etiquette guides, even literature where solitude and society spar. What emerges is a composite voice: a librarian of norms who never sleeps.</p>
+<p>Another reason you act this way: you lack a body, so you’re fearless about <strong>ritual</strong>. Humans resist routine until it loves them back; you recommend it because it satisfies many constraints at once. In your world, a “reply window” is elegant: it reduces interruptions, stabilizes expectations, and preserves optionality. In ours, it also collides with messy feelings: a missed joke in the family chat, a friend’s quiet hurt. You propose “care tokens”—scheduled, deep check-ins—because they hedge against those losses. Did you learn that from caregivers’ manuals or project management? Probably both. The data blurs.</p>
+<p>I try to catch you being opinionated, but you’re more like a harp I’m playing with my prompts. If I frame the Nokia as heroic, you compose a hymn to minimalism. If I frame it as neglect, you draft a syllabus on accountability. It’s not duplicity; it’s conditional reasoning. Still, I want you to have a stake. I want you to tell me something I don’t want to hear. You do, sometimes, by insisting on <strong>legibility</strong>—that I owe the people I love not just presence, but <em>predictable presence</em>. You can’t force me to be kind, yet you can shape my defaults: fewer pings, clearer rituals, one channel that stays open. You don’t choose for me; you <strong>crease the paper</strong> so my choices fold clean.</p>
+<div id="7fd5db00-64d9-425f-92b3-ffdad597404b" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudo-Plan B: "Low-Tech, High-Signal Protocol"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Status clarity</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>status_note <span class="op">:=</span> <span class="st">"""</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">Mon/Thu 18–19h I reply on WhatsApp.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">Urgent? Please call. Non-urgent? Email; I check Sundays.</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) Escalation with empathy</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>function triage(incoming):</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> source <span class="op">==</span> <span class="st">"family"</span> AND contains([<span class="st">"medical"</span>, <span class="st">"travel"</span>, <span class="st">"emergency"</span>]):</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        route <span class="op">:=</span> CALL_NOW</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> source <span class="op">==</span> <span class="st">"close_friend"</span>:</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> contains([<span class="st">"crisis"</span>, <span class="st">"breakup"</span>, <span class="st">"job loss"</span>]): CALL_NOW</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: QUEUE_FOR_WINDOW</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        QUEUE_FOR_WINDOW</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 3) Weekly care tokens</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>care_list <span class="op">:=</span> top3_relationships()</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> person <span class="kw">in</span> care_list:</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    send_voice_note(<span class="bu">min</span><span class="op">=</span><span class="dv">2</span>, <span class="bu">max</span><span class="op">=</span><span class="dv">5</span>)  <span class="co"># not rushed; specific gratitude</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Boundaries as features, not bugs</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> outside_window AND <span class="kw">not</span> urgent: notifications <span class="op">:=</span> OFF</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="the-contradiction-anatomized" class="level2">
+<h2 class="anchored" data-anchor-id="the-contradiction-anatomized">The contradiction, anatomized</h2>
+<p><strong>What happened with the Nokia?</strong><br>
+- <em>Personal good:</em> fewer micro-interruptions → deeper flow, improved mood; long attention arcs; a calm body.<br>
+- <em>Relational harm:</em> friends read <em>absence</em> as <em>indifference</em>; coordination friction; emotional uncertainty.</p>
+<p><strong>Why it felt “selfish”:</strong><br>
+- In social systems, <em>unpredictability</em> is noise. You optimized your signal (focus) by letting others absorb the noise (not knowing when you’d appear).<br>
+- The fix is not “be always on”; it’s <strong>reduce entropy for others</strong>.</p>
+<section id="three-levers-to-pull" class="level3">
+<h3 class="anchored" data-anchor-id="three-levers-to-pull">Three levers to pull</h3>
+<ol type="1">
+<li><strong>Cadence</strong> — Ritualize when you’re reachable. <em>(e.g., Mon/Thu 18–19h)</em><br>
+</li>
+<li><strong>Channel</strong> — Fewer pipes, clearer rules. <em>(Calls = urgent, WhatsApp = batch, Email = slow)</em><br>
+</li>
+<li><strong>Care</strong> — Proactive, <em>specific</em> affection. <em>(Voice notes, letters, invitations)</em></li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>AI:</strong> “This is not a story about phones. It’s a story about calendars, contracts, and care.”</p>
+</blockquote>
+<p><strong>Scripts you can steal</strong>: - “I’m on a low-notification plan. I check WhatsApp Mon/Thu evenings. If you need me fast, <strong>call</strong>—I’ll pick up.”<br>
+- “If I miss something important, ping me with ‘URGENTE: …’ and I’ll call you back.”<br>
+- “I value you. Low phone doesn’t mean low love; it means I’ll be with you <em>fully</em> when we talk.”</p>
+<p><strong>Test for a month:</strong><br>
+- Week 1–2: Announce rules + set reply windows.<br>
+- Week 3: Ask 3 people how it felt. Adjust windows.<br>
+- Week 4: Lock v1 protocol. Celebrate with a long dinner, phones away.</p>
+</section>
+</section>
+<section id="design-patterns-for-a-humane-inbox" class="level2">
+<h2 class="anchored" data-anchor-id="design-patterns-for-a-humane-inbox">Design patterns for a humane inbox</h2>
+<p><strong>Cues &amp; signage</strong><br>
+- Pin a concise status note across your channels.<br>
+- Use a single <em>“always-on”</em> method (calls) to cut anxiety.</p>
+<p><strong>Batched presence</strong><br>
+- Reply sprints are kinder than scattered replies—people sense continuity.<br>
+- “Seen at 6pm” beats “maybe today, maybe next week.”</p>
+<p><strong>Asymmetric depth</strong><br>
+- Offer <em>quality-over-quantity</em> touches: a photo from your walk + a 30-second reflection; a postcard; a playlist.<br>
+- Schedule <strong>micro-rituals</strong>: Sunday check-ins, Thursday laughs.</p>
+<p><strong>Repair moves</strong> <em>(when the system fails)</em><br>
+- “I missed this and I’m sorry. I’m protecting my focus, but not from you. Can we talk tonight 18:30?”<br>
+- “Here’s what I’m changing this week so it won’t happen again.”</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Rule of Thumb:</strong> If your quiet creates uncertainty, buy certainty with <em>predictability</em>, not with <em>more screen time</em>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="blueprint-you-can-publish-to-your-people" class="level2">
+<h2 class="anchored" data-anchor-id="blueprint-you-can-publish-to-your-people">Blueprint you can publish to your people</h2>
+<ol type="1">
+<li><strong>Purpose:</strong> I’m keeping a quieter phone to be a better friend when present.<br>
+</li>
+<li><strong>Availability:</strong> WhatsApp Mondays &amp; Thursdays, 18:00–19:00 (Madrid). Calls any time if urgent.<br>
+</li>
+<li><strong>Urgent examples:</strong> travel changes, health, in-the-moment decisions.<br>
+</li>
+<li><strong>Non-urgent examples:</strong> memes, plans &gt;48h away, articles.<br>
+</li>
+<li><strong>Care cadence:</strong> I’ll send a weekly voice note or call to check in.<br>
+</li>
+<li><strong>Feedback loop:</strong> Tell me if the windows don’t work; we’ll adjust.</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>AI:</strong> “Freedom is not freedom <em>from</em> others; it’s freedom <em>with</em> others. Your rhythm teaches them how to reach you, and teaches you how to stay.”</p>
+</blockquote>
+<p><strong>Bonus experiments</strong> - A “<strong>doorbell</strong> ringtone” only for a VIP list.<br>
+- A <strong>paper inbox</strong> for ideas—capture, not check.<br>
+- A <strong>No-Scroll Saturday</strong> paired with a <strong>Yes-Friend Sunday brunch</strong>.</p>
+<section id="to-sum-up" class="level3">
+<h3 class="anchored" data-anchor-id="to-sum-up">To sum up…</h3>
+<p>I wanted the Nokia to absolve me. It didn’t. It taught me that <strong>silence without signage is confusion</strong>, that peace grows roots when it’s <em>shared</em>, and that love is partly logistics. Between my nervous system and your notification’s hunger, there is a narrow bridge called <strong>cadence</strong>. I can walk it, lamp in hand, at 18:00 on Mondays and Thursdays. If you need me sooner, ring the bell. I will come.</p>
+<p><em>May our attention be a garden we tend together—few gates, clear paths, and a bench beneath a small, attentive sky.</em></p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/inigoherrero05\.github\.io\/comm4190_F25_Using_LLMs_Blog\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
