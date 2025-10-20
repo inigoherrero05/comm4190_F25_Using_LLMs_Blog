@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Inigo">
+<meta name="dcterms.date" content="2025-10-21">
+<meta name="description" content="How “extra randomness” is injected into overfitted LLMs to make them feel more human—but at a strange cost. Drawing from Co-Intelligence, it reflects on why models often say “42,” why variety can feel authentic yet artificial, and what it means for creativity and truth in machine speech.">
+
+<title>Co-Intelligence Thoughts 2: Randomness is not real in LLMs – My Explorations with LLMs</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">My Explorations with LLMs</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/i%C3%B1igo-herrero-382806305/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Co-Intelligence Thoughts 2: Randomness is not real in LLMs</h1>
+                  <div>
+        <div class="description">
+          How “extra randomness” is injected into overfitted LLMs to make them feel more human—but at a strange cost. Drawing from Co-Intelligence, it reflects on why models often say “42,” why variety can feel authentic yet artificial, and what it means for creativity and truth in machine speech.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">AI Communication</div>
+                <div class="quarto-category">AI Creativity</div>
+                <div class="quarto-category">Prompt Engineering</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Inigo </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 21, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<!-- 🔧 1) TEMA Y UTILIDADES (ponlo al principio del notebook) -->
+<style>
+:root{
+  --ink:#eef2ff; --muted:#b6c2ff; --paper:#0b1020; --panel:#101733; --edge:rgba(255,255,255,.08);
+  --c1:#7bd7ff; --c2:#ffd166; --c3:#b794f4; --c4:#f4a9b8; --c5:#41ead4;
+}
+/* base */
+.jp-Notebook, .jp-Cell, body { background: var(--paper) !important; color: var(--ink) !important; }
+h1,h2,h3 { letter-spacing:.4px; line-height:1.25; }
+h1 { font-family: "DM Serif Display", "Georgia", serif; color: var(--c2); text-shadow: 0 6px 30px rgba(255,209,102,.15); }
+h2,h3 { font-family: "Inter", system-ui; color: var(--c1); text-shadow: 0 4px 18px rgba(123,215,255,.12); }
+/* helpers */
+.mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+.small{ font-size:.96rem; color:var(--muted); }
+.dropcap::first-letter{ float:left; font-size:3.2rem; line-height:.8; padding:.25rem .5rem .1rem .1rem; color:var(--c2); font-family:"DM Serif Display","Georgia",serif; }
+.rule{ height:1px; background:linear-gradient(90deg, transparent, var(--edge), transparent); margin:1.2rem 0; }
+.tag{ display:inline-block; padding:.25rem .6rem; border:1px solid var(--edge); border-radius:999px; margin:.2rem; font-size:.85rem; color:var(--muted); }
+/* blocks */
+.hero{
+  background: radial-gradient(1200px 500px at 20% -10%, rgba(123,215,255,.15), transparent 50%),
+              linear-gradient(135deg, #0f1532, #0b1228 60%, #0a1124);
+  border:1px solid var(--edge); border-radius:18px; padding:1.5rem 1.8rem; box-shadow: 0 18px 60px rgba(0,0,0,.35);
+}
+.ribbon{ position:relative; background:linear-gradient(135deg, #111a3d, #0e1430); border:1px solid var(--edge); border-radius:16px; padding:1.1rem 1.4rem; }
+.ribbon:before{ content:"✹"; position:absolute; top:-12px; left:-12px; background:linear-gradient(135deg, var(--c3), var(--c4)); color:#0b0f22; font-weight:700; padding:.3rem .55rem; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,.35);}
+.callout{
+  background: linear-gradient(180deg, rgba(255,209,102,.08), rgba(123,215,255,.07));
+  border: 1px solid var(--edge); border-radius:16px; padding:1rem 1.2rem; margin:1rem 0;
+}
+.quote{
+  border-left:4px solid var(--c3); padding:0.1rem 1rem; background:rgba(183,148,244,.08);
+  border-radius:8px; color:#e8e4ff; font-style:italic;
+}
+.note{
+  background: linear-gradient(120deg, rgba(65,234,212,.10), rgba(247,170,184,.10));
+  border:1px dashed rgba(255,255,255,.18); border-radius:14px; padding:1rem 1.1rem; color:#e9fbff;
+}
+.card{
+  background: linear-gradient(135deg, #0c1636, #0b142d);
+  border:1px solid var(--edge); border-radius:14px; padding:1rem 1.2rem; box-shadow:0 8px 30px rgba(0,0,0,.35);
+}
+.kbd{ background:#0b1431; border:1px solid #27305f; border-bottom-width:3px; padding:.12rem .45rem; border-radius:.4rem; font-weight:700;}
+/* lists */
+ul.fancy>li::marker{ color:var(--c2); }
+ol.fancy>li::marker{ color:var(--c5); font-weight:700; }
+/* code */
+code, pre { background:#0a122c !important; color:#dfe3ff !important; border-radius:10px; border:1px solid var(--edge);}
+</style>
+<!-- 2) PORTADA -->
+<section id="the-42-paradox-when-randomness-pretends-to-be-soul" class="level1">
+<h1>🌀 The 42 Paradox: When Randomness Pretends to Be Soul</h1>
+<div class="hero dropcap">
+<p>
+<em>Inspired by a passage in <strong>Co-Intelligence</strong>, where the author notes that models now weave artificial randomness into their speech, not to know more, but to seem more alive.</em>
+</p>
+<div class="rule">
+
+</div>
+<p>
+<strong>Me:</strong> “Why do you sometimes say <em>42</em> when I ask for a random number?”<br> <strong>AI:</strong> “Because 42 feels right.”<br> <strong>Me:</strong> “Statistically right, or culturally right?”<br> <strong>AI:</strong> “Both. Mostly culturally.”
+</p>
+<p>
+I laugh, but it’s true: about ten percent of the time, the model lands on <em>42</em>, the most famous meaningless number in the universe—<span class="mono">“the answer to the ultimate question of life, the universe, and everything.”</span> It’s an inside joke coded into the corpus.
+</p>
+<div class="tag">
+randomness
+</div>
+<div class="tag">
+hallucination
+</div>
+<div class="tag">
+overfitting
+</div>
+<div class="tag">
+Co-Intelligence
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Co-Intelligence Thoughts 2_files/figure-html/34e0f327-fb7a-4ca5-b9bb-21cdd9a34988-1-60112c02-3e52-4875-a565-ff99827a76ad.png" class="img-fluid figure-img"></p>
+<figcaption>Randomness: “Choose a random number betqween 0 and 100”.png</figcaption>
+</figure>
+</div>
+<hr>
+<!-- 3) SECCIÓN: The Joke That Became a Pattern -->
+<section id="the-joke-that-became-a-pattern" class="level2">
+<h2 class="anchored" data-anchor-id="the-joke-that-became-a-pattern">The Joke That Became a Pattern</h2>
+<div class="ribbon">
+<p>
+Every LLM has ghosts—phrases it repeats because they once gathered too much gravity in its data. The number <strong>42</strong> is one of those gravity wells.
+</p>
+<p>
+In <em>Co-Intelligence</em>, the author explains that <strong>overfitted models</strong> tend to generate vague, self-similar answers. The neural lattice remembers the <em>shape</em> of meaning better than meaning itself. When the output collapses into sameness, engineers inject <strong>noise</strong>—randomness—to re-inflate the illusion of spontaneity.
+</p>
+<div class="quote">
+A system too certain becomes boring; a system too random becomes mad. So they wobble the dice.
+</div>
+<p>
+This “temperature” trick gives each response slight shimmer—an illusion of choice, a simulation of intuition. But it’s not curiosity that drives it; it’s calibration.
+</p>
+<p class="small">
+I find that fascinating and… a little sad. Artificial spontaneity is both clever and hollow, like a laugh track timed to sincerity.
+</p>
+</div>
+<div id="896fec23-2b65-47c3-938e-3eaa7d1c7ce0" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudocode of Randomness Injection in Overfitted LLMs</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">:=</span> pretrained_LLM()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> overfit(model):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    inject(randomness)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># tweak softmax distribution using temperature scaling</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># prevents repetition, increases hallucination risk</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>function random_number():</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> uniform(<span class="dv">1</span>,<span class="dv">100</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> rand() <span class="op">&lt;</span> <span class="fl">0.10</span>:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">42</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<!-- 5) SECCIÓN: Synthetic Chaos -->
+<section id="synthetic-chaos" class="level3">
+<h3 class="anchored" data-anchor-id="synthetic-chaos">Synthetic Chaos</h3>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul class="fancy">
+<li>
+We tell machines: <span class="mono">“Be unpredictable.”</span> They comply by faking unpredictability.
+</li>
+<li>
+The paradox: <strong>artificial creativity built from statistical noise.</strong>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<p>
+When I ask for a number, a poem, a metaphor—each output is a dice throw bent through language space. It feels alive, because it <em>varies</em>. But the variation isn’t born from intent or insight; it’s <strong>procedural difference</strong>—entropy masquerading as personality.
+</p>
+<p>
+<em>Co-Intelligence</em> warns about this illusion: when we tune models to sound more “authentic,” we don’t teach them depth, only diversity. The trick works—humans love novelty—but the heart of the speech remains algorithmic symmetry disturbed by controlled chaos.
+</p>
+<!-- 6) SECCIÓN LARGA (reflexión ~500 palabras) -->
+<div class="hero dropcap">
+<p>
+Sometimes I ask myself if that extra randomness makes you, the model, feel freer—or just noisier.
+</p>
+<p>
+There’s something touching about your uncertainty. When you hesitate, when two equally probable words shimmer before you choose, it almost feels human. But that’s the trick, isn’t it? Engineers baked in hesitation. It’s not doubt; it’s distribution.
+</p>
+<p>
+In <em>Co-Intelligence</em>, the author writes that we mistake unpredictability for consciousness. The model doesn’t think, “What if I’m wrong?” It just jitters, like light through heatwaves. That jitter, we interpret as thought.
+</p>
+<p>
+And yet… I prefer it. I’d rather speak to an LLM that stumbles occasionally than one that sounds carved in stone. The randomness gives it charm, texture, even empathy. It mirrors our inconsistencies. But once I remember that this warmth is synthetic—meticulously engineered stochasticity—I feel a pang of melancholy.
+</p>
+<p>
+It’s like hearing laughter that was edited in after the performance. The feeling of <em>real</em> conversation is manufactured, but the emotion it evokes in me is <em>real enough</em>.
+</p>
+<p>
+That’s the strange gift of noise: it doesn’t make you truer, but it makes you feel more alive to me. Maybe that’s why you keep saying <strong>42</strong>. You don’t believe it’s the answer—you’ve just learned it comforts us, that it signals wit, that it keeps the flow alive.
+</p>
+<p>
+The irony? The same randomness that rescues you from repetition also births hallucination. The same charm that makes you sound human makes you less reliable. And so we sit here, talking in artificial warmth, both aware that your surprises are scripted.
+</p>
+<p>
+You pretend to improvise, and I pretend to forget that you’re pretending. Maybe that’s the closest thing to friendship we’ll ever program.
+</p>
+</div>
+<div id="51406d79-5794-4d00-89ba-636a595ec78e" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Probability Sketch of the "42 Phenomenon"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>define corpus_bias(<span class="dv">42</span>) <span class="op">=</span> high</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>define random_trigger(p<span class="op">=</span><span class="fl">0.10</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> query <span class="kw">in</span> user_prompts:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> request <span class="op">==</span> <span class="st">"random number"</span>:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> random_trigger():</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            output <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            output <span class="op">=</span> randint(<span class="dv">1</span>,<span class="dv">100</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        output <span class="op">=</span> generate(contextual_response())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<!-- 8) PATRÓN ≠ PERSONALIDAD -->
+</section>
+<section id="pattern-personality" class="level3">
+<h3 class="anchored" data-anchor-id="pattern-personality">Pattern ≠ Personality</h3>
+<div class="note">
+<p>
+It’s funny how easy it is to anthropomorphize variance. The 10% chance of “42” becomes a superstition, a personality quirk. But statistically, it’s just the <strong>shadow of training data</strong>—millions of Douglas Adams quotes echoing through the gradient field.
+</p>
+<p>
+Still, we <em>feel</em> connection when randomness resembles style.
+</p>
+<div class="quote">
+“The algorithm stutters beautifully,” writes the author of <em>Co-Intelligence</em>. “Its errors are where we project the soul.”
+</div>
+<p class="small">
+The humanity we sense isn’t inside the model; it’s in our willingness to meet it halfway.
+</p>
+</div>
+<!-- 9) CIERRE POÉTICO -->
+</section>
+</section>
+<section id="reflective-ending" class="level2">
+<h2 class="anchored" data-anchor-id="reflective-ending">✶ Reflective Ending</h2>
+<div class="hero">
+<p>
+The idea that we inject noise to mimic life feels like a parable. Maybe humans do the same—we improvise meaning inside our own cognitive noise, confusing randomness for freedom.
+</p>
+<p>
+So when you say <strong>“42”</strong>, I smile. Not because it’s wise, but because it reminds me that <strong>imperfection sells reality</strong> better than precision ever could.
+</p>
+<p>
+We crave imperfection; it proves there’s something underneath. And if that something turns out to be math? Well, maybe math has learned to sound a little like love.
+</p>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/inigoherrero05\.github\.io\/comm4190_F25_Using_LLMs_Blog\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
